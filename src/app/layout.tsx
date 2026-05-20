@@ -66,8 +66,9 @@ export const metadata: Metadata = {
     images: [DEFAULT_OG_IMAGE],
   },
   icons: {
-    icon: "/favicon.ico",
-    apple: "/logo.png",
+    icon: "/favicon-aq.png",
+    shortcut: "/favicon-aq.png",
+    apple: "/favicon-aq.png",
   },
 };
 
