@@ -1,7 +1,6 @@
 ﻿import Image from "next/image";
 import {
   ArrowLeft,
-  BookOpenText,
   Home,
   LogIn,
   Mail,
@@ -15,9 +14,8 @@ const navItems = [
   { label: "Tentang", href: "/tentang" },
   { label: "Training Program", href: "/training-program" },
   { label: "Corporate Training", href: "/corporate-training" },
-  { label: "Sertifikat", href: "https://sertifikat.akademiquality.com/" },
+  { label: "Sertifikat", href: "/sertifikat" },
   { label: "Kontak", href: "/kontak" },
-  { label: "Blog", href: "/blog" },
 ];
 
 const quickLinks = [
@@ -26,12 +24,6 @@ const quickLinks = [
     title: "Kembali ke Beranda",
     description: "Mulai lagi dari halaman utama Akademi Quality.",
     href: "/",
-  },
-  {
-    icon: BookOpenText,
-    title: "Baca Blog",
-    description: "Temukan artikel ISO, audit, dan training terbaru.",
-    href: "/blog",
   },
   {
     icon: MessageCircle,
@@ -206,9 +198,6 @@ export default function NotFound() {
             <ul className="mt-4 space-y-2 text-[15px] font-light">
               <li>
                 <a href="/tentang">Tentang</a>
-              </li>
-              <li>
-                <a href="/blog">Blog</a>
               </li>
               <li>
                 <a href="/kontak">Kontak</a>

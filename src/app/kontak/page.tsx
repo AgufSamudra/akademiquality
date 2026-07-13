@@ -43,9 +43,8 @@ const navItems = [
   { label: "Tentang", href: "/tentang" },
   { label: "Training Program", href: "/training-program" },
   { label: "Corporate Training", href: "/corporate-training" },
-  { label: "Sertifikat", href: "https://sertifikat.akademiquality.com/" },
+  { label: "Sertifikat", href: "/sertifikat" },
   { label: "Kontak", href: "/kontak" },
-  { label: "Blog", href: "/blog" },
 ];
 
 const whatsappHref =
@@ -381,9 +380,6 @@ export default function KontakPage() {
             <ul className="mt-4 space-y-2 text-[15px] font-light">
               <li>
                 <a href="/tentang">Tentang</a>
-              </li>
-              <li>
-                <a href="/blog">Blog</a>
               </li>
               <li>
                 <a href="/kontak">Kontak</a>

@@ -1,7 +1,15 @@
 import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
-  /* config options here */
+  images: {
+    remotePatterns: [
+      {
+        protocol: "https",
+        hostname: "hiipgoqfwhdfqqxayvlt.supabase.co",
+        pathname: "/storage/v1/object/public/training-image/**",
+      },
+    ],
+  },
 };
 
 export default nextConfig;

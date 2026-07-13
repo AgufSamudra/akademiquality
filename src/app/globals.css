@@ -130,88 +130,97 @@
 }
 
 @layer components {
-  .blog-article {
-    color: #2d292b;
+  .training-content,
+  .training-article {
+    color: #332f31;
   }
 
-  .blog-article h1,
-  .blog-article h2,
-  .blog-article h3 {
+  .training-content h1,
+  .training-content h2,
+  .training-content h3,
+  .training-content h4,
+  .training-article h1,
+  .training-article h2,
+  .training-article h3,
+  .training-article h4 {
     color: #000;
     font-weight: 700;
-    letter-spacing: 0;
-    line-height: 1.18;
+    line-height: 1.22;
+    margin: 2rem 0 0.85rem;
   }
 
-  .blog-article h1 {
-    font-size: 2.35rem;
-    margin: 0 0 1rem;
+  .training-content h1, .training-article h1 { font-size: 2rem; }
+  .training-content h2, .training-article h2 { font-size: 2rem; }
+  .training-content h3, .training-article h3 { font-size: 1.45rem; }
+
+  .training-article h2 {
+    margin-top: 3.25rem;
+    border-left: 4px solid currentColor;
+    padding-left: 1rem;
   }
 
-  .blog-article h2 {
-    font-size: 1.75rem;
-    margin: 2.4rem 0 1rem;
+  .training-article h2:first-child {
+    margin-top: 0;
   }
 
-  .blog-article h3 {
-    font-size: 1.35rem;
-    margin: 2rem 0 0.8rem;
+  .training-article h3 {
+    margin-top: 2.35rem;
+    padding-bottom: 0.55rem;
+    border-bottom: 1px solid currentColor;
   }
 
-  .blog-article p,
-  .blog-article li {
+  .training-content p,
+  .training-content li,
+  .training-article p,
+  .training-article li {
     font-size: 1rem;
-    line-height: 1.9;
+    line-height: 1.85;
   }
 
-  .blog-article p {
-    margin: 1rem 0;
+  .training-article p {
+    color: #453e41;
   }
 
-  .blog-article ul {
-    margin: 1rem 0 1.4rem;
-    padding-left: 1.25rem;
+  .training-article-dark { color: rgba(255, 255, 255, 0.78); }
+  .training-article-dark h1,
+  .training-article-dark h2,
+  .training-article-dark h3,
+  .training-article-dark h4 { color: #fff; }
+  .training-article-dark h2 { border-left-color: #f1a6c1; }
+  .training-article-dark h3 { border-bottom-color: rgba(255,255,255,.18); }
+  .training-article-dark p { color: rgba(255,255,255,.72); }
+  .training-article-dark li::marker { color: #f1a6c1; }
+  .training-article-dark a { color: #f6bbcf; }
+
+  .training-article-pink { color: #f1a6c1; }
+  .training-article-pink h1,
+  .training-article-pink h2,
+  .training-article-pink h3,
+  .training-article-pink h4,
+  .training-article-pink p { color: #f1a6c1; }
+  .training-article-pink h3 { border-bottom-color: rgba(241,166,193,.35); }
+  .training-article-pink li::marker { color: #f1a6c1; }
+  .training-article-pink a { color: #fff; }
+
+  .training-content p, .training-article p { margin: 0.9rem 0; }
+  .training-content ul, .training-content ol, .training-article ul, .training-article ol { margin: 1rem 0 1.4rem; padding-left: 1.35rem; }
+  .training-content ul li, .training-article ul li { list-style: disc; margin: 0.45rem 0; }
+  .training-content ol li, .training-article ol li { list-style: decimal; margin: 0.45rem 0; }
+  .training-content li::marker, .training-article li::marker { color: #b63161; }
+
+  .training-article ul,
+  .training-article ol {
+    border: 0;
+    border-radius: 0;
+    background: transparent;
+    padding: 0 0 0 1.45rem;
   }
 
-  .blog-article li {
-    margin: 0.45rem 0;
-    list-style: disc;
+  .training-article li {
+    padding-left: 0.15rem;
   }
-
-  .blog-article a {
-    color: #9f315d;
-    font-weight: 600;
-    text-decoration: underline;
-    text-underline-offset: 4px;
-  }
-
-  .blog-article blockquote {
-    margin: 1.6rem 0;
-    border-left: 4px solid #000;
-    border-radius: 0 18px 18px 0;
-    background: #f7f4f5;
-    padding: 1rem 1.25rem;
-    color: #312b2d;
-    font-weight: 600;
-  }
-
-  .blog-article strong {
-    color: #000;
-    font-weight: 700;
-  }
-
-  @media (min-width: 768px) {
-    .blog-article h1 {
-      font-size: 3rem;
-    }
-
-    .blog-article h2 {
-      font-size: 2.05rem;
-    }
-
-    .blog-article p,
-    .blog-article li {
-      font-size: 1.0625rem;
-    }
-  }
+  .training-content a, .training-article a { color: #b63161; font-weight: 600; text-decoration: underline; text-underline-offset: 3px; }
+  .training-content table, .training-article table { display: block; width: 100%; overflow-x: auto; border-collapse: collapse; margin: 1.5rem 0; }
+  .training-content th, .training-content td, .training-article th, .training-article td { border: 1px solid #e8e3e5; padding: 0.75rem; text-align: left; vertical-align: top; }
+  .training-content th, .training-article th { background: #f7f4f5; color: #000; font-weight: 700; }
 }
