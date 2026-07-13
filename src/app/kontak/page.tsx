@@ -4,7 +4,6 @@ import {
   ArrowRight,
   CheckCircle2,
   Clock3,
-  LogIn,
   Mail,
   MapPin,
   MessageCircle,
@@ -15,6 +14,7 @@ import {
 } from "lucide-react";
 
 import { MobileMenu } from "@/components/MobileMenu";
+import { DEFAULT_OG_IMAGE, SITE_NAME } from "@/lib/seo";
 
 export const metadata: Metadata = {
   title: "Kontak",
@@ -28,23 +28,32 @@ export const metadata: Metadata = {
     description:
       "Butuh bantuan memilih training ISO? Hubungi tim Akademi Quality melalui email atau WhatsApp.",
     url: "/kontak",
+    siteName: SITE_NAME,
+    locale: "id_ID",
+    type: "website",
     images: [
       {
-        url: "/hero.png",
+        url: DEFAULT_OG_IMAGE,
         width: 1200,
         height: 630,
         alt: "Kontak Akademi Quality",
       },
     ],
   },
+  twitter: {
+    card: "summary_large_image",
+    title: "Kontak - Akademi Quality",
+    description:
+      "Butuh bantuan memilih training ISO? Hubungi tim Akademi Quality melalui email atau WhatsApp.",
+    images: [DEFAULT_OG_IMAGE],
+  },
 };
 
 const navItems = [
+  { label: "QHSE", href: "/qhse" },
+  { label: "Rumah Sakit", href: "/rumah-sakit" },
   { label: "Tentang", href: "/tentang" },
-  { label: "Training Program", href: "/training-program" },
-  { label: "Corporate Training", href: "/corporate-training" },
-  { label: "Sertifikat", href: "/sertifikat" },
-  { label: "Kontak", href: "/kontak" },
+  { label: "Artikel", href: "/blog" },
 ];
 
 const whatsappHref =
@@ -120,10 +129,12 @@ export default function KontakPage() {
           <div className="hidden items-center lg:flex">
             <a
               className="inline-flex items-center gap-2 rounded-full bg-white px-5 py-2.5 text-[14px] font-semibold text-black shadow-[0_14px_35px_rgba(255,255,255,0.12)] transition-transform hover:-translate-y-0.5"
-              href="/login"
+              href={whatsappHref}
+              rel="noreferrer"
+              target="_blank"
             >
-              Login
-              <LogIn size={16} />
+              Konsultasi
+              <MessageCircle size={16} />
             </a>
           </div>
           <MobileMenu items={navItems} />
@@ -389,9 +400,9 @@ export default function KontakPage() {
           <div>
             <h3 className="text-[22px] font-medium">Training</h3>
             <div className="mt-4 grid gap-y-2 text-[15px] font-light">
-              <a href="/training-iso-9001-online-bersertifikat">ISO 9001</a>
-              <a href="/training-iso-14001-online-murah-bersertifikat">ISO 14001</a>
-              <a href="/training-iso-27001-online-murah-terjangkau-bersertifikat">ISO 27001</a>
+              <a href="/qhse">ISO 9001</a>
+              <a href="/qhse">ISO 14001</a>
+              <a href="/qhse">ISO 27001</a>
             </div>
           </div>
         </div>

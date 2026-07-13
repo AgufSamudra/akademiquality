@@ -4,6 +4,7 @@ import {
   FocusTrainingPage,
   type FocusTrainingPageData,
 } from "@/components/FocusTrainingPage";
+import { DEFAULT_OG_IMAGE, SITE_NAME } from "@/lib/seo";
 
 export const metadata: Metadata = {
   title: "Training QHSE",
@@ -17,14 +18,24 @@ export const metadata: Metadata = {
     description:
       "Bangun kompetensi QHSE melalui pembelajaran praktis bersama Akademi Quality.",
     url: "/qhse",
+    siteName: SITE_NAME,
+    locale: "id_ID",
+    type: "website",
     images: [
       {
-        url: "/corporate-training.png",
+        url: DEFAULT_OG_IMAGE,
         width: 1200,
         height: 630,
         alt: "Training QHSE Akademi Quality",
       },
     ],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Training QHSE - Akademi Quality",
+    description:
+      "Bangun kompetensi QHSE melalui pembelajaran praktis bersama Akademi Quality.",
+    images: [DEFAULT_OG_IMAGE],
   },
 };
 

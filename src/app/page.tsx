@@ -17,7 +17,7 @@ const navItems = [
   { label: "QHSE", href: "/qhse" },
   { label: "Rumah Sakit", href: "/rumah-sakit" },
   { label: "Tentang", href: "/tentang" },
-  { label: "Sertifikat", href: "/sertifikat" },
+  { label: "Artikel", href: "/blog" },
 ];
 
 const whatsappHref =
@@ -424,7 +424,7 @@ export default async function Home() {
         </div>
       </section>
 
-      <section id="program" className="hidden">
+      <section aria-hidden="true" className="hidden">
         <div className="absolute inset-x-0 top-24 h-[520px] bg-[radial-gradient(circle_at_18%_18%,rgba(0,0,0,0.045),transparent_34%),radial-gradient(circle_at_82%_32%,rgba(200,77,124,0.035),transparent_36%)]" />
         <div className="relative mx-auto max-w-[1120px]">
           <SectionTitle eyebrow="Berbagai Program" title="Akademi Quality" />
@@ -456,7 +456,7 @@ export default async function Home() {
                   nyata, dan mendukung pengembangan portofolio Anda.
                 </p>
                 <div className="mt-7 flex flex-wrap gap-3">
-                  <a className="inline-flex w-full items-center justify-center gap-2 rounded-full bg-black px-6 py-3 text-[14px] font-semibold text-white transition-transform hover:-translate-y-0.5 sm:w-auto" href="/training-program">
+                  <a className="inline-flex w-full items-center justify-center gap-2 rounded-full bg-black px-6 py-3 text-[14px] font-semibold text-white transition-transform hover:-translate-y-0.5 sm:w-auto" href="#pelatihan">
                     Lihat Detail
                     <ArrowRight size={16} />
                   </a>
@@ -532,7 +532,7 @@ export default async function Home() {
                   siap diterapkan di lingkungan kerja.
                 </p>
                 <div className="mt-7 flex flex-wrap gap-3">
-                  <a className="inline-flex w-full items-center justify-center gap-2 rounded-full bg-black px-6 py-3 text-[14px] font-semibold text-white transition-transform hover:-translate-y-0.5 sm:w-auto" href="/corporate-training">
+                  <a className="inline-flex w-full items-center justify-center gap-2 rounded-full bg-black px-6 py-3 text-[14px] font-semibold text-white transition-transform hover:-translate-y-0.5 sm:w-auto" href="#kontak">
                     Lihat Detail
                     <ArrowRight size={16} />
                   </a>
@@ -546,7 +546,7 @@ export default async function Home() {
         </div>
       </section>
 
-      <section className="relative overflow-hidden bg-[#f7f7f6] px-5 py-20 md:px-10 md:py-28">
+      <section id="program" className="relative scroll-mt-24 overflow-hidden bg-[#f7f7f6] px-5 py-20 md:px-10 md:py-28">
         <div className="absolute inset-0 bg-[radial-gradient(circle_at_18%_16%,rgba(200,77,124,0.08),transparent_26%),radial-gradient(circle_at_82%_80%,rgba(0,0,0,0.07),transparent_30%)]" />
         <div className="relative mx-auto max-w-[1200px]">
           <div className="flex flex-col gap-5 md:flex-row md:items-end md:justify-between">

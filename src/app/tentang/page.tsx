@@ -13,6 +13,7 @@ import {
 } from "lucide-react";
 
 import { MobileMenu } from "@/components/MobileMenu";
+import { DEFAULT_OG_IMAGE, SITE_NAME } from "@/lib/seo";
 
 export const metadata: Metadata = {
   title: "Tentang",
@@ -26,14 +27,24 @@ export const metadata: Metadata = {
     description:
       "Akademi Quality membantu individu dan organisasi membangun kompetensi QHSE dan Rumah Sakit yang relevan dengan kebutuhan kerja.",
     url: "/tentang",
+    siteName: SITE_NAME,
+    locale: "id_ID",
+    type: "website",
     images: [
       {
-        url: "/hero.png",
+        url: DEFAULT_OG_IMAGE,
         width: 1200,
         height: 630,
         alt: "Tentang Akademi Quality",
       },
     ],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Akademi Quality - Tentang",
+    description:
+      "Akademi Quality membantu individu dan organisasi membangun kompetensi QHSE dan Rumah Sakit yang relevan dengan kebutuhan kerja.",
+    images: [DEFAULT_OG_IMAGE],
   },
 };
 
@@ -41,7 +52,7 @@ const navItems = [
   { label: "QHSE", href: "/qhse" },
   { label: "Rumah Sakit", href: "/rumah-sakit" },
   { label: "Tentang", href: "/tentang" },
-  { label: "Sertifikat", href: "/sertifikat" },
+  { label: "Artikel", href: "/blog" },
 ];
 
 const missions = [

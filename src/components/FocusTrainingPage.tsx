@@ -18,7 +18,7 @@ const navItems = [
   { label: "QHSE", href: "/qhse" },
   { label: "Rumah Sakit", href: "/rumah-sakit" },
   { label: "Tentang", href: "/tentang" },
-  { label: "Sertifikat", href: "/sertifikat" },
+  { label: "Artikel", href: "/blog" },
 ];
 
 const whatsappHref =

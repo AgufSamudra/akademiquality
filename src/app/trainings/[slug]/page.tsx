@@ -6,7 +6,7 @@ import { notFound } from "next/navigation";
 import { MobileMenu } from "@/components/MobileMenu";
 
 import { getTrainingBySlug, normalizeTrainingHtml, parseTrainingContent, toList } from "@/lib/trainings";
-import { absoluteUrl, SITE_NAME } from "@/lib/seo";
+import { absoluteUrl, DEFAULT_OG_IMAGE, SITE_NAME } from "@/lib/seo";
 
 type Props = { params: Promise<{ slug: string }> };
 
@@ -15,7 +15,7 @@ const navItems = [
   { label: "QHSE", href: "/qhse" },
   { label: "Rumah Sakit", href: "/rumah-sakit" },
   { label: "Tentang", href: "/tentang" },
-  { label: "Sertifikat", href: "/sertifikat" },
+  { label: "Artikel", href: "/blog" },
 ];
 const alumni = [
   ["Materi disampaikan dengan runtut dan mudah diikuti. Studi kasusnya membantu kami memahami penerapannya di pekerjaan sehari-hari.", "Rina Prasetya", "Quality Manager"],
@@ -82,7 +82,21 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     title: training.title,
     description,
     alternates: { canonical: `/trainings/${training.slug}` },
-    openGraph: { title: `${training.title} | ${SITE_NAME}`, description, images: [{ url: training.image_url, alt: training.title }] },
+    openGraph: {
+      title: `${training.title} | ${SITE_NAME}`,
+      description,
+      url: `/trainings/${training.slug}`,
+      siteName: SITE_NAME,
+      locale: "id_ID",
+      type: "website",
+      images: [{ url: DEFAULT_OG_IMAGE, width: 1200, height: 630, alt: training.title }],
+    },
+    twitter: {
+      card: "summary_large_image",
+      title: `${training.title} | ${SITE_NAME}`,
+      description,
+      images: [DEFAULT_OG_IMAGE],
+    },
   };
 }
 
@@ -109,7 +123,37 @@ export default async function TrainingDetailPage({ params }: Props) {
   const participants = toList(training.target_participants ?? training.target_participant);
   const message = encodeURIComponent(`Halo Akademi Quality, saya ingin konsultasi mengenai ${training.title}.`);
   const whatsappHref = `https://wa.me/${whatsappNumber}?text=${message}`;
-  const schema = { "@context": "https://schema.org", "@type": "Course", name: training.title, description: intro, image: training.image_url, provider: { "@type": "Organization", name: SITE_NAME, url: absoluteUrl() } };
+  const trainingUrl = absoluteUrl(`/trainings/${training.slug}`);
+  const schema = {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "Course",
+        name: training.title,
+        description: intro,
+        image: training.image_url,
+        url: trainingUrl,
+        inLanguage: "id-ID",
+        provider: { "@type": "Organization", name: SITE_NAME, url: absoluteUrl() },
+      },
+      {
+        "@type": "BreadcrumbList",
+        itemListElement: [
+          { "@type": "ListItem", position: 1, name: "Beranda", item: absoluteUrl() },
+          { "@type": "ListItem", position: 2, name: "Pelatihan", item: absoluteUrl("/#pelatihan") },
+          { "@type": "ListItem", position: 3, name: training.title, item: trainingUrl },
+        ],
+      },
+      {
+        "@type": "FAQPage",
+        mainEntity: faqs.map(([question, answer]) => ({
+          "@type": "Question",
+          name: question,
+          acceptedAnswer: { "@type": "Answer", text: answer },
+        })),
+      },
+    ],
+  };
 
   return <main className="min-h-dvh bg-white text-black">
     <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(schema) }} />

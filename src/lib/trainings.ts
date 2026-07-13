@@ -25,39 +25,60 @@ export type TrainingDetail = TrainingSummary & {
 
 const API_URL = "https://myquality.akademiquality.com/api/trainings";
 
-export async function getTrainingBySlug(slug: string): Promise<TrainingDetail | null> {
-  // The public catalog exposes the slug, while the detail API is keyed by ID.
-  // Fetch each catalog page so any valid slug can resolve to its matching ID.
-  const firstResponse = await fetch(`${API_URL}?limit=50`, {
-    next: { revalidate: 300 },
-  });
-  if (!firstResponse.ok) return null;
-
-  const firstData = (await firstResponse.json()) as {
-    trainings?: TrainingSummary[];
-    pagination?: { totalPages?: number };
-  };
-  let training = firstData.trainings?.find((item) => item.slug === slug);
-
-  for (let page = 2; !training && page <= (firstData.pagination?.totalPages ?? 1); page += 1) {
-    const response = await fetch(`${API_URL}?limit=50&page=${page}`, {
+export const getAllTrainings = cache(async (): Promise<TrainingSummary[]> => {
+  try {
+    const firstResponse = await fetch(`${API_URL}?limit=50`, {
       next: { revalidate: 300 },
+      signal: AbortSignal.timeout(5000),
     });
-    if (!response.ok) continue;
-    const data = (await response.json()) as { trainings?: TrainingSummary[] };
-    training = data.trainings?.find((item) => item.slug === slug);
-  }
+    if (!firstResponse.ok) return [];
 
+    const firstData = (await firstResponse.json()) as {
+      trainings?: TrainingSummary[];
+      pagination?: { totalPages?: number };
+    };
+    const totalPages = firstData.pagination?.totalPages ?? 1;
+    const remainingPages = await Promise.all(
+      Array.from({ length: Math.max(0, totalPages - 1) }, async (_, index) => {
+        try {
+          const response = await fetch(`${API_URL}?limit=50&page=${index + 2}`, {
+            next: { revalidate: 300 },
+            signal: AbortSignal.timeout(5000),
+          });
+          if (!response.ok) return [];
+          const data = (await response.json()) as { trainings?: TrainingSummary[] };
+          return data.trainings ?? [];
+        } catch {
+          return [];
+        }
+      }),
+    );
+
+    return [...(firstData.trainings ?? []), ...remainingPages.flat()];
+  } catch {
+    return [];
+  }
+});
+
+export const getTrainingBySlug = cache(async (slug: string): Promise<TrainingDetail | null> => {
+  const training = (await getAllTrainings()).find((item) => item.slug === slug);
   if (!training) return null;
 
-  const detailResponse = await fetch(`${API_URL}/${training.id}`, {
-    next: { revalidate: 300 },
-  });
-  if (!detailResponse.ok) return training;
+  try {
+    const detailResponse = await fetch(`${API_URL}/${training.id}`, {
+      next: { revalidate: 300 },
+      signal: AbortSignal.timeout(5000),
+    });
+    if (!detailResponse.ok) return training;
 
-  const data = (await detailResponse.json()) as TrainingDetail | { training?: TrainingDetail };
-  return "training" in data && data.training ? { ...training, ...data.training } : { ...training, ...data };
-}
+    const data = (await detailResponse.json()) as TrainingDetail | { training?: TrainingDetail };
+    return "training" in data && data.training
+      ? { ...training, ...data.training }
+      : { ...training, ...data };
+  } catch {
+    return training;
+  }
+});
 
 export function toList(value: unknown) {
   if (Array.isArray(value)) return value.filter((item): item is string => typeof item === "string" && Boolean(item.trim()));
@@ -203,3 +224,4 @@ export function normalizeTrainingHtml(contentHtml: string) {
   });
   return result;
 }
+import { cache } from "react";

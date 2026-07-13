@@ -2,7 +2,6 @@
 import {
   ArrowLeft,
   Home,
-  LogIn,
   Mail,
   MessageCircle,
   SearchX,
@@ -11,11 +10,10 @@ import {
 import { MobileMenu } from "@/components/MobileMenu";
 
 const navItems = [
+  { label: "QHSE", href: "/qhse" },
+  { label: "Rumah Sakit", href: "/rumah-sakit" },
   { label: "Tentang", href: "/tentang" },
-  { label: "Training Program", href: "/training-program" },
-  { label: "Corporate Training", href: "/corporate-training" },
-  { label: "Sertifikat", href: "/sertifikat" },
-  { label: "Kontak", href: "/kontak" },
+  { label: "Artikel", href: "/blog" },
 ];
 
 const quickLinks = [
@@ -69,10 +67,10 @@ export default function NotFound() {
           <div className="hidden items-center lg:flex">
             <a
               className="inline-flex items-center gap-2 rounded-full bg-white px-5 py-2.5 text-[14px] font-semibold text-black shadow-[0_14px_35px_rgba(255,255,255,0.12)] transition-transform hover:-translate-y-0.5"
-              href="/login"
+              href="/kontak"
             >
-              Login
-              <LogIn size={16} />
+              Konsultasi
+              <MessageCircle size={16} />
             </a>
           </div>
           <MobileMenu items={navItems} />
@@ -207,9 +205,9 @@ export default function NotFound() {
           <div>
             <h3 className="text-[22px] font-medium">Training</h3>
             <div className="mt-4 grid gap-y-2 text-[15px] font-light">
-              <a href="/training-iso-9001-online-bersertifikat">ISO 9001</a>
-              <a href="/training-iso-14001-online-murah-bersertifikat">ISO 14001</a>
-              <a href="/training-iso-27001-online-murah-terjangkau-bersertifikat">ISO 27001</a>
+              <a href="/qhse">ISO 9001</a>
+              <a href="/qhse">ISO 14001</a>
+              <a href="/qhse">ISO 27001</a>
             </div>
           </div>
         </div>

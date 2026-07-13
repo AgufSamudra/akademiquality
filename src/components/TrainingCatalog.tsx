@@ -131,7 +131,7 @@ export function TrainingCatalog({
   }
 
   return (
-    <section className="relative overflow-hidden bg-[#f8f8f7] px-5 py-16 md:px-10 md:py-24">
+    <section id="pelatihan" className="relative scroll-mt-24 overflow-hidden bg-[#f8f8f7] px-5 py-16 md:px-10 md:py-24">
       <div className="absolute inset-0 bg-[linear-gradient(90deg,rgba(0,0,0,0.035)_1px,transparent_1px),linear-gradient(180deg,rgba(0,0,0,0.03)_1px,transparent_1px)] bg-[size:74px_74px]" />
       <div className="relative mx-auto max-w-[1200px]">
         <div className="max-w-[620px]">

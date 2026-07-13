@@ -1,17 +1,12 @@
 export const SITE_URL = "https://akademiquality.com";
 export const SITE_NAME = "Akademi Quality";
-export const DEFAULT_OG_IMAGE = "/hero.png";
+export const DEFAULT_OG_IMAGE = "/opengraph-image";
 
 export const staticRoutes = [
   { path: "/", priority: 1 },
-  { path: "/training-program", priority: 0.9 },
-  { path: "/corporate-training", priority: 0.9 },
-  { path: "/training-iso-9001-online-bersertifikat", priority: 0.9 },
-  { path: "/training-iso-14001-online-murah-bersertifikat", priority: 0.9 },
-  {
-    path: "/training-iso-27001-online-murah-terjangkau-bersertifikat",
-    priority: 0.9,
-  },
+  { path: "/qhse", priority: 0.9 },
+  { path: "/rumah-sakit", priority: 0.9 },
+  { path: "/blog", priority: 0.8 },
   { path: "/tentang", priority: 0.7 },
   { path: "/kontak", priority: 0.8 },
 ] as const;
