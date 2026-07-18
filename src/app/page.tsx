@@ -12,6 +12,7 @@ import { CountUpNumber } from "@/components/CountUpNumber";
 import { MobileMenu } from "@/components/MobileMenu";
 import { SiteFooter, SiteHeader } from "@/components/SiteChrome";
 import { TrainingCatalog, type Training, type TrainingPagination } from "@/components/TrainingCatalog";
+import { TrainingPricing } from "@/components/TrainingPricing";
 import { absoluteUrl, SITE_NAME, SITE_URL } from "@/lib/seo";
 
 const navItems = [
@@ -74,6 +75,7 @@ const testimonials = [
   ["Kami mendapatkan sudut pandang baru untuk meningkatkan kesiapan tim dan membangun kebiasaan kerja yang lebih baik.", "Budi Santoso", "Manajemen Perusahaan"],
 ] as const;
 
+// Kept for the legacy markup below; the rendered pricing section uses TrainingPricing.
 const pricingPlans = [
   ["Online Training", "3JT", "5JT", "/ Peserta", ["E-Sertifikat", "Softcopy Materi", "Rekaman Kelas", "Konsultasi Paska Training", "Terhubung dengan Komunitas"], false],
   ["InHouse Training Online", "12JT", "16JT", "/ 15 Peserta", ["E-Sertifikat", "Softcopy Materi", "Rekaman Kelas", "Konsultasi Paska Training", "Terhubung dengan Komunitas"], false],
@@ -621,7 +623,8 @@ export default async function Home() {
         </div>
       </section>
 
-      <section className="relative overflow-hidden bg-[#f8f8f7] px-5 py-20 md:px-10 md:py-28">
+      <TrainingPricing />
+      {false ? <section className="relative overflow-hidden bg-[#f8f8f7] px-5 py-20 md:px-10 md:py-28">
         <div className="absolute inset-0 bg-[radial-gradient(circle_at_10%_16%,rgba(200,77,124,0.08),transparent_25%),radial-gradient(circle_at_90%_84%,rgba(0,0,0,0.06),transparent_28%)]" />
         <div className="relative mx-auto max-w-[1200px]">
           <div className="mx-auto max-w-3xl text-center">
@@ -649,7 +652,7 @@ export default async function Home() {
             ))}
           </div>
         </div>
-      </section>
+      </section> : null}
 
       <section id="kontak" className="relative overflow-hidden bg-[#f8f8f7] px-5 py-20 md:px-10 md:py-28">
         <div className="absolute inset-0 bg-[radial-gradient(circle_at_10%_16%,rgba(200,77,124,0.08),transparent_25%),radial-gradient(circle_at_90%_84%,rgba(0,0,0,0.06),transparent_28%)]" />
