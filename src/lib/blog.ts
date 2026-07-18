@@ -10,6 +10,7 @@ export type BlogPost = {
   description: string;
   date: string;
   category: string;
+  subcategory: string;
   tags: string[];
   body: string;
 };
@@ -18,9 +19,20 @@ export type BlogBlock =
   | { type: "heading"; text: string }
   | { type: "paragraph"; text: string }
   | { type: "list"; items: string[] }
-  | { type: "quote"; text: string };
+  | { type: "quote"; text: string }
+  | { type: "link"; label: string; href: string };
 
 const BLOG_DIRECTORY = path.join(process.cwd(), "content", "blog");
+
+async function getBlogFilenames(directory = BLOG_DIRECTORY): Promise<string[]> {
+  const entries = await fs.readdir(directory, { withFileTypes: true });
+  const filenames = await Promise.all(entries.map(async (entry) => {
+    const entryPath = path.join(directory, entry.name);
+    if (entry.isDirectory()) return getBlogFilenames(entryPath);
+    return entry.name.endsWith(".md") ? [entryPath] : [];
+  }));
+  return filenames.flat();
+}
 
 function readFrontmatter(source: string) {
   const match = source.match(/^---\r?\n([\s\S]*?)\r?\n---\r?\n?/);
@@ -47,19 +59,18 @@ function parseTags(value = "") {
 }
 
 export const getAllBlogPosts = cache(async (): Promise<BlogPost[]> => {
-  const filenames = await fs.readdir(BLOG_DIRECTORY);
+  const filenames = await getBlogFilenames();
   const posts = await Promise.all(
-    filenames
-      .filter((filename) => filename.endsWith(".md"))
-      .map(async (filename) => {
-        const source = await fs.readFile(path.join(BLOG_DIRECTORY, filename), "utf8");
+    filenames.map(async (filename) => {
+        const source = await fs.readFile(filename, "utf8");
         const { attributes, body } = readFrontmatter(source);
         return {
-          slug: filename.replace(/\.md$/, ""),
-          title: attributes.get("title") ?? filename.replace(/\.md$/, ""),
+          slug: path.basename(filename, ".md"),
+          title: attributes.get("title") ?? path.basename(filename, ".md"),
           description: attributes.get("description") ?? "",
           date: attributes.get("date") ?? "",
           category: attributes.get("category") ?? "Artikel",
+          subcategory: attributes.get("subcategory") ?? path.basename(path.dirname(filename)),
           tags: parseTags(attributes.get("tags")),
           body,
         } satisfies BlogPost;
@@ -112,6 +123,13 @@ export function parseBlogBody(body: string): BlogBlock[] {
       flushParagraph();
       flushList();
       blocks.push({ type: "quote", text: line.slice(2) });
+      continue;
+    }
+    if (line.startsWith("LINK: ")) {
+      flushParagraph();
+      flushList();
+      const [label, href] = line.slice(6).split("|");
+      if (label?.trim() && href?.trim()) blocks.push({ type: "link", label: label.trim(), href: href.trim() });
       continue;
     }
     flushList();

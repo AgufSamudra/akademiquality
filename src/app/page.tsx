@@ -73,10 +73,10 @@ const testimonials = [
 ] as const;
 
 const pricingPlans = [
-  ["Online Training", "3JT", "/ Peserta", ["E-Sertifikat", "Softcopy Materi", "Rekaman Kelas", "Konsultasi Paska Training", "Terhubung dengan Komunitas"], false],
-  ["InHouse Training Online", "12JT", "/ 15 Peserta", ["E-Sertifikat", "Softcopy Materi", "Rekaman Kelas", "Konsultasi Paska Training", "Terhubung dengan Komunitas"], false],
-  ["Offline Training", "4JT", "/ Peserta", ["E-Sertifikat", "Softcopy Materi", "Training Kit", "Dilaksanakan di Hotel", "Coffee Break dan Lunch", "Konsultasi Paska Training", "Terhubung dengan Komunitas"], true],
-  ["InHouse Training Offline", "18JT", "/ 15 Peserta", ["E-Sertifikat", "Softcopy Materi", "Training Kit", "Dilaksanakan di Hotel atau Lokasi Perusahaan", "Coffee Break dan Lunch", "Konsultasi Paska Training", "Terhubung dengan Komunitas"], false],
+  ["Online Training", "3JT", "5JT", "/ Peserta", ["E-Sertifikat", "Softcopy Materi", "Rekaman Kelas", "Konsultasi Paska Training", "Terhubung dengan Komunitas"], false],
+  ["InHouse Training Online", "12JT", "16JT", "/ 15 Peserta", ["E-Sertifikat", "Softcopy Materi", "Rekaman Kelas", "Konsultasi Paska Training", "Terhubung dengan Komunitas"], false],
+  ["Offline Training", "4JT", "8JT", "/ Peserta", ["E-Sertifikat", "Softcopy Materi", "Training Kit", "Dilaksanakan di Hotel", "Coffee Break dan Lunch", "Konsultasi Paska Training", "Terhubung dengan Komunitas"], true],
+  ["InHouse Training Offline", "18JT", "22JT", "/ 15 Peserta", ["E-Sertifikat", "Softcopy Materi", "Training Kit", "Dilaksanakan di Hotel atau Lokasi Perusahaan", "Coffee Break dan Lunch", "Konsultasi Paska Training", "Terhubung dengan Komunitas"], false],
 ] as const;
 
 const faqItems = [
@@ -627,12 +627,15 @@ export default async function Home() {
             <p className="mx-auto mt-5 max-w-2xl text-[15px] leading-relaxed text-black/60">Tersedia pilihan kelas individu maupun paket untuk tim. Hubungi kami untuk penyesuaian kebutuhan QHSE dan Rumah Sakit.</p>
           </div>
           <div className="mt-12 grid gap-5 md:grid-cols-2 xl:grid-cols-4">
-            {pricingPlans.map(([title, price, unit, features, popular]) => (
+            {pricingPlans.map(([title, price, originalPrice, unit, features, popular]) => (
               <article className={`relative flex min-h-[500px] flex-col overflow-hidden rounded-[26px] border p-6 shadow-[0_18px_55px_rgba(0,0,0,0.07)] transition-transform duration-300 hover:-translate-y-1 ${popular ? "border-black bg-[linear-gradient(145deg,#080808_0%,#281018_100%)] text-white shadow-[0_24px_70px_rgba(0,0,0,0.2)]" : "border-white/80 bg-white/75 text-black backdrop-blur-xl"}`} key={title}>
                 {popular ? <span className="absolute right-4 top-4 rounded-full bg-[#e75686] px-3 py-1 text-[10px] font-bold uppercase tracking-wide text-white">Pilihan Populer</span> : null}
                 <p className={`max-w-[170px] text-[20px] font-bold leading-tight ${popular ? "text-white" : "text-black"}`}>{title}</p>
                 <div className="mt-8 border-t border-current/10 pt-6">
-                  <p className="text-[42px] font-bold leading-none tracking-tight">{price}</p>
+                  <div className="flex items-end gap-2">
+                    <p className="text-[42px] font-bold leading-none tracking-tight">{price}</p>
+                    <p className={`pb-1 text-[16px] font-semibold leading-none line-through ${popular ? "text-white/55" : "text-black/40"}`}>{originalPrice}</p>
+                  </div>
                   <p className={`mt-2 min-h-[36px] text-[13px] leading-snug ${popular ? "text-white/68" : "text-black/55"}`}>{unit}</p>
                 </div>
                 <ul className={`mt-6 grid gap-3 text-[14px] leading-snug ${popular ? "text-white/78" : "text-black/65"}`}>
