@@ -8,6 +8,7 @@ const navItems = [
   { label: "Rumah Sakit", href: "/rumah-sakit" },
   { label: "Tentang", href: "/tentang" },
   { label: "Artikel", href: "/blog" },
+  { label: "Kontak", href: "/kontak" },
 ];
 
 export function SiteHeader() {

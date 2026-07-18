@@ -98,7 +98,7 @@ export default async function BlogPostPage({ params }: Props) {
             if (block.type === "heading") return <h2 className="mb-4 mt-10 text-3xl font-bold tracking-tight first:mt-0" key={`${block.type}-${index}`}>{block.text}</h2>;
             if (block.type === "list") return <ul className="my-6 list-disc space-y-3 pl-6 text-[17px] leading-8 text-black/70" key={`${block.type}-${index}`}>{block.items.map((item) => <li key={item}>{item}</li>)}</ul>;
             if (block.type === "quote") return <blockquote className="my-8 border-l-4 border-[#ae4169] bg-[#f7f4f5] px-6 py-5 text-lg font-semibold leading-8" key={`${block.type}-${index}`}>{block.text}</blockquote>;
-            if (block.type === "link") return <Link className="my-8 inline-flex rounded-full bg-black px-5 py-3 text-sm font-bold text-white transition-transform hover:-translate-y-0.5" href={block.href} key={`${block.type}-${index}`}>{block.label}<ArrowRight className="ml-2" size={16} /></Link>;
+            if (block.type === "link") return <Link className="group my-4 flex w-fit items-center gap-2 border-b border-[#ae4169]/30 pb-2 text-[15px] font-semibold text-[#ae4169] transition-colors hover:border-[#ae4169] hover:text-black" href={block.href} key={`${block.type}-${index}`}><span>{block.label}</span><ArrowRight className="transition-transform group-hover:translate-x-1" size={16} /></Link>;
             return <p className="mb-6 text-[17px] leading-8 text-black/70" key={`${block.type}-${index}`}>{block.text}</p>;
           })}
         </div>

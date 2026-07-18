@@ -9,6 +9,7 @@ export const staticRoutes = [
   { path: "/blog", priority: 0.8 },
   { path: "/tentang", priority: 0.7 },
   { path: "/kontak", priority: 0.8 },
+  { path: "/sertifikat", priority: 0.7 },
 ] as const;
 
 export function absoluteUrl(pathname = "/") {
