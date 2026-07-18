@@ -13,6 +13,7 @@ import {
 
 import { MobileMenu } from "@/components/MobileMenu";
 import { TrainingCatalog } from "@/components/TrainingCatalog";
+import { SiteFooter, SiteHeader } from "@/components/SiteChrome";
 
 const navItems = [
   { label: "QHSE", href: "/qhse" },
@@ -47,7 +48,8 @@ export type FocusTrainingPageData = {
 export function FocusTrainingPage({ data }: { data: FocusTrainingPageData }) {
   return (
     <main className="min-h-dvh bg-white text-black">
-      <header className="sticky top-0 z-50 bg-black px-3 py-3 text-white md:px-11">
+      <SiteHeader />
+      <header className="hidden sticky top-0 z-50 bg-black px-3 py-3 text-white md:px-11">
         <div className="mx-auto flex max-w-[1200px] items-center justify-between gap-3 px-4 py-2 md:gap-6 md:px-5">
           <Link className="shrink-0" href="/" aria-label="Akademi Quality home">
             <Image
@@ -331,7 +333,7 @@ export function FocusTrainingPage({ data }: { data: FocusTrainingPageData }) {
         </div>
       </section>
 
-      <footer className="relative mt-10 overflow-hidden bg-[linear-gradient(135deg,#050505_0%,#121212_52%,#251016_100%)] px-5 pt-16 text-white md:px-10 md:pt-20">
+      <footer className="hidden relative mt-10 overflow-hidden bg-[linear-gradient(135deg,#050505_0%,#121212_52%,#251016_100%)] px-5 pt-16 text-white md:px-10 md:pt-20">
         <div className="absolute inset-0 bg-[linear-gradient(90deg,rgba(255,255,255,0.08)_1px,transparent_1px),linear-gradient(180deg,rgba(255,255,255,0.06)_1px,transparent_1px)] bg-[size:72px_72px] opacity-[0.05]" />
         <div className="relative mx-auto grid max-w-[1200px] gap-10 md:grid-cols-[1.2fr_1fr_1fr]">
           <div>
@@ -423,6 +425,7 @@ export function FocusTrainingPage({ data }: { data: FocusTrainingPageData }) {
           <span>Provider Training SDM untuk QHSE dan Rumah Sakit</span>
         </div>
       </footer>
+      <SiteFooter />
 
       <a
         className="fixed bottom-5 right-5 z-40 inline-flex items-center gap-3 rounded-full bg-[#25d366] px-4 py-4 text-[15px] font-semibold text-white shadow-lg sm:bottom-6 sm:right-6 sm:px-5"
