@@ -24,14 +24,11 @@ export type BlogBlock =
 
 const BLOG_DIRECTORY = path.join(process.cwd(), "content", "blog");
 
-async function getBlogFilenames(directory = BLOG_DIRECTORY): Promise<string[]> {
-  const entries = await fs.readdir(directory, { withFileTypes: true });
-  const filenames = await Promise.all(entries.map(async (entry) => {
-    const entryPath = path.join(directory, entry.name);
-    if (entry.isDirectory()) return getBlogFilenames(entryPath);
-    return entry.name.endsWith(".md") ? [entryPath] : [];
-  }));
-  return filenames.flat();
+async function getBlogFilenames(): Promise<string[]> {
+  const entries = await fs.readdir(BLOG_DIRECTORY, { withFileTypes: true });
+  return entries
+    .filter((entry) => entry.isFile() && entry.name.endsWith(".md"))
+    .map((entry) => path.join(BLOG_DIRECTORY, entry.name));
 }
 
 function readFrontmatter(source: string) {
@@ -70,7 +67,7 @@ export const getAllBlogPosts = cache(async (): Promise<BlogPost[]> => {
           description: attributes.get("description") ?? "",
           date: attributes.get("date") ?? "",
           category: attributes.get("category") ?? "Artikel",
-          subcategory: attributes.get("subcategory") ?? path.basename(path.dirname(filename)),
+          subcategory: attributes.get("subcategory") ?? "Artikel",
           tags: parseTags(attributes.get("tags")),
           body,
         } satisfies BlogPost;
