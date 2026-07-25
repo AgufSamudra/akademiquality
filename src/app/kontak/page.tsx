@@ -16,7 +16,7 @@ export const metadata: Metadata = {
 
 const contactChannels = [
   { icon: MessageCircle, title: "WhatsApp", value: "0895-0763-9360", note: "Chat langsung dengan Sarah untuk konsultasi cepat.", href: whatsappHref },
-  { icon: Mail, title: "Email", value: "akademiquality@gmail.com", note: "Untuk penawaran, kerja sama, atau kebutuhan yang lebih detail.", href: "mailto:akademiquality@gmail.com" },
+  { icon: Mail, title: "Email", value: "info@akademiquality.com", note: "Untuk penawaran, kerja sama, atau kebutuhan yang lebih detail.", href: "mailto:info@akademiquality.com" },
 ];
 
 const steps = [
@@ -39,7 +39,7 @@ export default function KontakPage() {
             <p className="mt-6 max-w-[650px] text-[17px] leading-[1.8] text-white/70 md:text-[18px]">Diskusikan kebutuhan QHSE, Rumah Sakit, audit, sertifikasi, maupun pengembangan kompetensi bersama tim Akademi Quality.</p>
             <div className="mt-9 flex flex-wrap gap-3">
               <a className="inline-flex items-center gap-2 rounded-full bg-white px-6 py-3.5 text-[15px] font-semibold text-black transition-transform hover:-translate-y-0.5" href={whatsappHref} rel="noreferrer" target="_blank">Konsultasi via WhatsApp <ArrowRight size={17} /></a>
-              <a className="inline-flex items-center gap-2 rounded-full border border-white/18 px-6 py-3.5 text-[15px] font-semibold text-white transition-colors hover:bg-white/10" href="mailto:akademiquality@gmail.com">Kirim email <Mail size={17} /></a>
+              <a className="inline-flex items-center gap-2 rounded-full border border-white/18 px-6 py-3.5 text-[15px] font-semibold text-white transition-colors hover:bg-white/10" href="mailto:info@akademiquality.com">Kirim email <Mail size={17} /></a>
             </div>
             <div className="mt-10 flex flex-wrap gap-x-7 gap-y-3 text-sm text-white/66"><span className="flex items-center gap-2"><CheckCircle2 className="text-[#f3a3c0]" size={17} /> Respon konsultatif</span><span className="flex items-center gap-2"><CheckCircle2 className="text-[#f3a3c0]" size={17} /> Online & offline</span></div>
           </div>
