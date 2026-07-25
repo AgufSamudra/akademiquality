@@ -153,7 +153,7 @@ export default async function TrainingDetailPage({ params }: Props) {
   return <main className="training-detail min-h-dvh bg-white text-black">
     <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(schema) }} />
     <style>{".training-detail > header, .training-detail > footer { display: none; }"}</style>
-    <div>
+    <div className="sticky top-0 z-50">
       <SiteHeader />
     </div>
     <header className="sticky top-0 z-50 bg-black px-3 py-3 text-white md:px-11"><div className="mx-auto flex max-w-[1200px] items-center justify-between gap-3 bg-black px-4 py-2 md:gap-6 md:px-5"><Link className="shrink-0" href="/" aria-label="Akademi Quality home"><Image src="/logo.png" alt="Akademi Quality" width={198} height={72} className="h-[46px] w-[136px] object-contain md:h-[64px] md:w-[178px]" /></Link><nav className="hidden items-center gap-7 text-[15px] font-normal lg:flex">{navItems.map((item) => <a className="rounded-full px-1 py-2 text-white/82 transition-colors hover:text-white" href={item.href} key={item.label}>{item.label}</a>)}</nav><MobileMenu items={navItems} /></div></header>
