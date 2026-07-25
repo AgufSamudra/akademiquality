@@ -14,6 +14,10 @@ const navItems = [
 export function SiteHeader() {
   return (
     <header className="sticky top-0 z-50 bg-black px-3 py-3 text-white md:px-11">
+      <div className="mx-auto flex max-w-[1200px] flex-wrap justify-center gap-x-4 gap-y-1 border-b border-white/10 px-4 pb-2 text-[11px] text-white/70 sm:justify-end sm:text-xs md:px-5">
+        <a className="transition-colors hover:text-white" href="mailto:info@akademiquality.com">info@akademiquality.com</a>
+        <a className="transition-colors hover:text-white" href="https://wa.me/6289507639360" rel="noreferrer" target="_blank">WhatsApp: 0895-0763-9360</a>
+      </div>
       <div className="mx-auto flex max-w-[1200px] items-center justify-between gap-3 px-4 py-2 md:gap-6 md:px-5">
         <Link className="shrink-0" href="/" aria-label="Akademi Quality home">
           <Image src="/logo.png" alt="Akademi Quality" width={198} height={72} className="h-[46px] w-[136px] object-contain md:h-[64px] md:w-[178px]" />
@@ -31,7 +35,7 @@ export function SiteFooter() {
   return (
     <footer className="relative overflow-hidden bg-[linear-gradient(135deg,#050505_0%,#121212_52%,#251016_100%)] px-5 pt-16 text-white md:px-10 md:pt-20">
       <div className="absolute inset-0 bg-[linear-gradient(90deg,rgba(255,255,255,0.08)_1px,transparent_1px),linear-gradient(180deg,rgba(255,255,255,0.06)_1px,transparent_1px)] bg-[size:72px_72px] opacity-[0.05]" />
-      <div className="relative mx-auto grid max-w-[1200px] gap-10 md:grid-cols-[1.2fr_1fr_1fr]">
+      <div className="relative mx-auto grid max-w-[1200px] gap-10 md:grid-cols-[1.2fr_1fr_1fr_1fr]">
         <div>
           <Image src="/logo.png" alt="Akademi Quality" width={198} height={72} className="h-[62px] w-[172px] object-contain md:h-[72px] md:w-[198px]" />
           <p className="mt-5 max-w-[360px] text-[15px] leading-[1.8] text-white/65">Mengembangkan kompetensi tim melalui pelatihan yang praktis, relevan, dan siap diterapkan di dunia kerja.</p>
@@ -43,6 +47,7 @@ export function SiteFooter() {
         </div>
         <div><p className="text-[12px] font-bold uppercase tracking-[0.16em] text-[#f1a6c1]">Navigasi</p><ul className="mt-5 space-y-3 text-[15px] text-white/70"><li><Link className="transition-colors hover:text-white" href="/">Beranda</Link></li><li><Link className="transition-colors hover:text-white" href="/tentang">Tentang Kami</Link></li><li><Link className="transition-colors hover:text-white" href="/kontak">Hubungi Kami</Link></li></ul></div>
         <div><p className="text-[12px] font-bold uppercase tracking-[0.16em] text-[#f1a6c1]">Program</p><div className="mt-5 grid gap-y-3 text-[15px] text-white/70"><Link className="transition-colors hover:text-white" href="/#program">Public Training</Link><Link className="transition-colors hover:text-white" href="/#program">Online Training</Link><Link className="transition-colors hover:text-white" href="/#program">InHouse Training</Link><Link className="transition-colors hover:text-white" href="/#program">Sertifikasi</Link></div></div>
+        <div><p className="text-[12px] font-bold uppercase tracking-[0.16em] text-[#f1a6c1]">Kontak</p><div className="mt-5 grid gap-y-3 text-[15px] text-white/70"><a className="transition-colors hover:text-white" href="mailto:info@akademiquality.com">info@akademiquality.com</a><a className="transition-colors hover:text-white" href="https://wa.me/6289507639360" rel="noreferrer" target="_blank">WhatsApp<br />0895-0763-9360</a></div></div>
       </div>
       <div className="relative mx-auto mt-14 flex max-w-[1200px] flex-col gap-2 border-t border-white/10 py-5 text-[12px] text-white/50 sm:flex-row sm:items-center sm:justify-between"><span>Copyright &copy; 2026 Akademi Quality</span><span>Provider Training SDM untuk QHSE dan Rumah Sakit</span></div>
     </footer>
