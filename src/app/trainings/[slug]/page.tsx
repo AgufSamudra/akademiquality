@@ -12,7 +12,7 @@ import { TrainingPricing } from "@/components/TrainingPricing";
 
 type Props = { params: Promise<{ slug: string }> };
 
-const whatsappNumber = "6289507639360";
+const whatsappNumber = "6285139495190";
 const navItems = [
   { label: "QHSE", href: "/qhse" },
   { label: "Rumah Sakit", href: "/rumah-sakit" },

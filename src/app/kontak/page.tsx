@@ -5,7 +5,7 @@ import { ArrowRight, CheckCircle2, Clock3, Mail, MapPin, MessageCircle, Phone } 
 import { SiteFooter, SiteHeader } from "@/components/SiteChrome";
 import { DEFAULT_OG_IMAGE, SITE_NAME } from "@/lib/seo";
 
-const whatsappHref = "https://wa.me/6289507639360?text=Halo%20Akademi%20Quality%2C%20saya%20ingin%20berkonsultasi%20mengenai%20pelatihan.";
+const whatsappHref = "https://wa.me/6285139495190?text=Halo%20Akademi%20Quality%2C%20saya%20ingin%20berkonsultasi%20mengenai%20pelatihan.";
 
 export const metadata: Metadata = {
   title: "Kontak",
@@ -15,7 +15,7 @@ export const metadata: Metadata = {
 };
 
 const contactChannels = [
-  { icon: MessageCircle, title: "WhatsApp", value: "0895-0763-9360", note: "Chat langsung dengan Sarah untuk konsultasi cepat.", href: whatsappHref },
+  { icon: MessageCircle, title: "WhatsApp", value: "0851-3949-5190", note: "Chat langsung dengan Sarah untuk konsultasi cepat.", href: whatsappHref },
   { icon: Mail, title: "Email", value: "info@akademiquality.com", note: "Untuk penawaran, kerja sama, atau kebutuhan yang lebih detail.", href: "mailto:info@akademiquality.com" },
 ];
 

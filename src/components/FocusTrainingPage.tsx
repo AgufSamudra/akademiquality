@@ -23,7 +23,7 @@ const navItems = [
 ];
 
 const whatsappHref =
-  "https://wa.me/6289507639360?text=Halo%20Akademi%20Quality%2C%20saya%20ingin%20mendiskusikan%20kebutuhan%20pelatihan.";
+  "https://wa.me/6285139495190?text=Halo%20Akademi%20Quality%2C%20saya%20ingin%20mendiskusikan%20kebutuhan%20pelatihan.";
 
 export type FocusTrainingPageData = {
   badge: string;

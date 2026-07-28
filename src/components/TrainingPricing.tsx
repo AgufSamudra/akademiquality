@@ -1,6 +1,6 @@
 import { ArrowRight, CheckCircle2 } from "lucide-react";
 
-const whatsappHref = "https://wa.me/6289507639360?text=Halo%20Akademi%20Quality%2C%20saya%20ingin%20mendiskusikan%20kebutuhan%20pelatihan.";
+const whatsappHref = "https://wa.me/6285139495190?text=Halo%20Akademi%20Quality%2C%20saya%20ingin%20mendiskusikan%20kebutuhan%20pelatihan.";
 
 const pricingPlans = [
   ["Online Training", "3JT", "5JT", "/ Peserta", ["E-Sertifikat", "Softcopy Materi", "Rekaman Kelas", "Konsultasi Paska Training", "Terhubung dengan Komunitas"], false],
