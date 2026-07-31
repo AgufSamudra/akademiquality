@@ -4,6 +4,7 @@ import Link from "next/link";
 import { MobileMenu } from "@/components/MobileMenu";
 
 const navItems = [
+  { label: "Cari Training", href: "/rekomendasi-training" },
   { label: "QHSE", href: "/qhse" },
   { label: "Rumah Sakit", href: "/rumah-sakit" },
   { label: "Tentang", href: "/tentang" },
@@ -33,7 +34,7 @@ export function SiteHeader() {
 
 export function SiteFooter() {
   return (
-    <footer className="relative overflow-hidden bg-[linear-gradient(135deg,#050505_0%,#121212_52%,#251016_100%)] px-5 pt-16 text-white md:px-10 md:pt-20">
+    <footer className="relative min-h-[360px] grow overflow-hidden bg-[linear-gradient(135deg,#050505_0%,#121212_52%,#251016_100%)] px-5 pt-16 text-white md:px-10 md:pt-20">
       <div className="absolute inset-0 bg-[linear-gradient(90deg,rgba(255,255,255,0.08)_1px,transparent_1px),linear-gradient(180deg,rgba(255,255,255,0.06)_1px,transparent_1px)] bg-[size:72px_72px] opacity-[0.05]" />
       <div className="relative mx-auto grid max-w-[1200px] gap-10 md:grid-cols-[1.2fr_1fr_1fr_1fr]">
         <div>
@@ -45,7 +46,7 @@ export function SiteFooter() {
             <a aria-label="LinkedIn Akademi Quality" className="grid h-10 w-10 place-items-center rounded-full border border-white/12 bg-white/8 text-white transition-colors hover:bg-white hover:text-black" href="https://www.linkedin.com/company/akademi-quality/" rel="noreferrer" target="_blank"><span className="text-[13px] font-bold leading-none">in</span></a>
           </div>
         </div>
-        <div><p className="text-[12px] font-bold uppercase tracking-[0.16em] text-[#f1a6c1]">Navigasi</p><ul className="mt-5 space-y-3 text-[15px] text-white/70"><li><Link className="transition-colors hover:text-white" href="/">Beranda</Link></li><li><Link className="transition-colors hover:text-white" href="/tentang">Tentang Kami</Link></li><li><Link className="transition-colors hover:text-white" href="/kontak">Hubungi Kami</Link></li></ul></div>
+        <div><p className="text-[12px] font-bold uppercase tracking-[0.16em] text-[#f1a6c1]">Navigasi</p><ul className="mt-5 space-y-3 text-[15px] text-white/70"><li><Link className="transition-colors hover:text-white" href="/">Beranda</Link></li><li><Link className="transition-colors hover:text-white" href="/rekomendasi-training">Cari Training</Link></li><li><Link className="transition-colors hover:text-white" href="/tentang">Tentang Kami</Link></li><li><Link className="transition-colors hover:text-white" href="/kontak">Hubungi Kami</Link></li></ul></div>
         <div><p className="text-[12px] font-bold uppercase tracking-[0.16em] text-[#f1a6c1]">Program</p><div className="mt-5 grid gap-y-3 text-[15px] text-white/70"><Link className="transition-colors hover:text-white" href="/#program">Public Training</Link><Link className="transition-colors hover:text-white" href="/#program">Online Training</Link><Link className="transition-colors hover:text-white" href="/#program">InHouse Training</Link><Link className="transition-colors hover:text-white" href="/#program">Sertifikasi</Link></div></div>
         <div><p className="text-[12px] font-bold uppercase tracking-[0.16em] text-[#f1a6c1]">Kontak</p><div className="mt-5 grid gap-y-3 text-[15px] text-white/70"><a className="transition-colors hover:text-white" href="mailto:info@akademiquality.com">info@akademiquality.com</a><a className="transition-colors hover:text-white" href="https://wa.me/6285139495190" rel="noreferrer" target="_blank">WhatsApp<br />0851-3949-5190</a></div></div>
       </div>

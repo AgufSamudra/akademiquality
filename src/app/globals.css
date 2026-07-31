@@ -83,6 +83,16 @@
   --sidebar-ring: oklch(0.708 0 0);
 }
 
+html,
+body {
+  min-height: 100%;
+  background: #050505 !important;
+}
+
+body > main {
+  flex: 1 0 auto;
+}
+
 .dark {
   --background: oklch(0.145 0 0);
   --foreground: oklch(0.985 0 0);
@@ -123,13 +133,78 @@
   }
   body {
     @apply bg-background text-foreground;
+    background-color: #050505;
   }
   html {
     @apply font-sans;
+    background-color: #050505;
+  }
+  button:not(:disabled),
+  a,
+  [role="button"] {
+    cursor: pointer;
+  }
+  button:disabled {
+    cursor: not-allowed;
   }
 }
 
 @layer components {
+  .matching-unified-result + #assessment {
+    display: none;
+  }
+
+  @keyframes matching-loading-slide {
+    0% { transform: translateX(-120%); }
+    100% { transform: translateX(320%); }
+  }
+
+  .matching-loading-bar {
+    animation: matching-loading-slide 1.35s ease-in-out infinite;
+  }
+
+  @keyframes fadeIn {
+    from { opacity: 0; transform: translateY(12px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  @media (min-width: 1024px) {
+    #assessment {
+      display: grid;
+      grid-template-columns: minmax(270px, 340px) minmax(0, 820px);
+      justify-content: center;
+      align-items: start;
+      gap: clamp(2rem, 4vw, 4rem);
+    }
+
+    #assessment::before {
+      content: "AKU TEMANI, YA!";
+      position: sticky;
+      top: 7rem;
+      display: block;
+      min-height: 540px;
+      border: 1px solid #eadde2;
+      border-radius: 2rem;
+      padding: 2rem;
+      background-image: url("/mascot/mascot-2.png"), linear-gradient(145deg, #fff 0%, #fff7fa 100%);
+      background-position: center bottom, center;
+      background-repeat: no-repeat;
+      background-size: 108% auto, cover;
+      box-shadow: 0 22px 60px rgba(0, 0, 0, 0.09);
+      color: #ae4169;
+      font-size: 0.75rem;
+      font-weight: 700;
+      letter-spacing: 0.14em;
+    }
+
+    #assessment > div {
+      width: 100%;
+      max-width: 820px;
+      margin-left: 0;
+      margin-right: 0;
+    }
+  }
+
   .training-content,
   .training-article {
     color: #332f31;

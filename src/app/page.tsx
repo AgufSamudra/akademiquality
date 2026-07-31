@@ -16,6 +16,7 @@ import { TrainingPricing } from "@/components/TrainingPricing";
 import { absoluteUrl, SITE_NAME, SITE_URL } from "@/lib/seo";
 
 const navItems = [
+  { label: "Cari Training", href: "/rekomendasi-training" },
   { label: "QHSE", href: "/qhse" },
   { label: "Rumah Sakit", href: "/rumah-sakit" },
   { label: "Tentang", href: "/tentang" },
@@ -239,7 +240,7 @@ export default async function Home() {
   const { trainings, pagination } = await getTrainings();
 
   return (
-    <main className="min-h-dvh bg-white text-black">
+    <main className="flex min-h-dvh flex-col bg-white text-black">
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData) }}
@@ -329,6 +330,27 @@ export default async function Home() {
       </section>
 
       <TrainingCatalog pagination={pagination} trainings={trainings} />
+
+      <section className="relative overflow-hidden bg-[#f5f5f2] px-5 py-16 md:px-10 md:py-24">
+        <div className="absolute inset-0 bg-[linear-gradient(90deg,rgba(0,0,0,.035)_1px,transparent_1px),linear-gradient(180deg,rgba(0,0,0,.03)_1px,transparent_1px)] bg-[size:72px_72px] opacity-60" />
+        <div className="absolute -right-28 -top-28 h-80 w-80 rounded-full bg-[#c84d7c]/8 blur-3xl" />
+        <div className="relative mx-auto grid max-w-[1120px] overflow-hidden rounded-[34px] border border-[#e5e1e2] bg-white shadow-[0_26px_75px_rgba(0,0,0,0.09)] md:grid-cols-[1.08fr_.92fr]">
+          <div className="relative flex flex-col justify-start overflow-hidden px-7 pb-0 pt-10 sm:px-10 md:min-h-[650px] md:px-12 md:py-14 lg:px-14">
+            <div className="relative z-10 flex items-center gap-3"><span className="h-px w-9 bg-[#c84d7c]" /><p className="text-[12px] font-bold uppercase tracking-[0.2em] text-[#ae4169]">Training Finder</p></div>
+            <h2 className="relative z-10 mt-5 max-w-[530px] text-[34px] font-bold leading-[1.08] tracking-tight md:text-[48px]">Masih bingung memilih training yang tepat?</h2>
+            <p className="relative z-10 mt-5 max-w-[520px] text-[15px] leading-[1.75] text-[#625a5e]">Jawab beberapa pertanyaan singkat untuk menemukan program yang paling sesuai dengan bidang, tantangan, dan target kompetensi Anda.</p>
+            <Link href="/rekomendasi-training" className="relative z-20 mt-7 inline-flex w-fit items-center gap-2 rounded-full bg-[#c84d7c] px-7 py-4 text-[14px] font-bold text-white shadow-[0_14px_34px_rgba(200,77,124,.25)] transition hover:-translate-y-0.5 hover:bg-[#ae4169]">Temukan Training Saya <ArrowRight size={17} /></Link>
+            <div className="relative -mb-1 mt-2 h-[235px] w-full md:absolute md:-bottom-3 md:-right-8 md:mt-0 md:h-[330px] md:w-[330px]"><Image src="/mascot/mascot-2.png" alt="Maskot Akademi Quality menunjuk contoh hasil rekomendasi" fill className="object-contain object-bottom mix-blend-multiply" sizes="(min-width: 768px) 330px, 235px" /></div>
+          </div>
+          <div className="relative overflow-hidden border-t border-[#eee7ea] bg-[radial-gradient(circle_at_72%_22%,rgba(200,77,124,.13),transparent_29%),linear-gradient(145deg,#fbfaf9_0%,#f0ebed_100%)] px-5 pb-6 pt-16 md:min-h-[580px] md:border-l md:border-t-0 md:p-0">
+            <div className="absolute right-5 top-5 z-20 rounded-full border border-white bg-white/90 px-4 py-2 text-[10px] font-bold uppercase tracking-[.14em] text-[#ae4169] shadow-sm backdrop-blur">Contoh hasil rekomendasi</div>
+            <div className="absolute -bottom-24 -right-20 h-72 w-72 rounded-full border border-[#c84d7c]/10" /><div className="absolute -bottom-10 -right-8 h-44 w-44 rounded-full bg-[#c84d7c]/8" />
+            <div className="relative aspect-square w-full overflow-hidden rounded-[18px] border-[5px] border-white bg-white shadow-[0_18px_40px_rgba(50,20,32,.14)] md:absolute md:bottom-8 md:left-8 md:right-8 md:top-16 md:aspect-auto md:w-auto md:rotate-[1deg] md:rounded-[22px] md:border-[6px] md:shadow-[0_24px_55px_rgba(50,20,32,.18)] md:transition-transform md:duration-300 md:hover:rotate-0">
+              <Image src="/training-recommendation-result.png" alt="Contoh hasil rekomendasi training Akademi Quality" fill className="object-contain object-top" sizes="(min-width: 768px) 340px, calc(100vw - 80px)" />
+            </div>
+          </div>
+        </div>
+      </section>
 
       <section className="relative overflow-hidden bg-[linear-gradient(135deg,#050505_0%,#101010_52%,#251016_100%)] px-5 py-24 text-white md:px-10 md:py-32">
         <div className="absolute inset-0 bg-[linear-gradient(90deg,rgba(255,255,255,0.08)_1px,transparent_1px),linear-gradient(180deg,rgba(255,255,255,0.06)_1px,transparent_1px)] bg-[size:72px_72px] opacity-[0.06]" />
