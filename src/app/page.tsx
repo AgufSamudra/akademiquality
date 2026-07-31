@@ -334,7 +334,7 @@ export default async function Home() {
       <section className="relative overflow-hidden bg-[#f5f5f2] px-5 py-16 md:px-10 md:py-24">
         <div className="absolute inset-0 bg-[linear-gradient(90deg,rgba(0,0,0,.035)_1px,transparent_1px),linear-gradient(180deg,rgba(0,0,0,.03)_1px,transparent_1px)] bg-[size:72px_72px] opacity-60" />
         <div className="absolute -right-28 -top-28 h-80 w-80 rounded-full bg-[#c84d7c]/8 blur-3xl" />
-        <div className="relative mx-auto grid max-w-[1120px] overflow-hidden rounded-[34px] border border-[#e5e1e2] bg-white shadow-[0_26px_75px_rgba(0,0,0,0.09)] md:grid-cols-[1.08fr_.92fr]">
+        <div className="relative mx-auto grid w-full max-w-[1200px] overflow-hidden rounded-[34px] border border-[#e5e1e2] bg-white shadow-[0_26px_75px_rgba(0,0,0,0.09)] md:grid-cols-[1.08fr_.92fr]">
           <div className="relative flex flex-col justify-start overflow-hidden px-7 pb-0 pt-10 sm:px-10 md:min-h-[650px] md:px-12 md:py-14 lg:px-14">
             <div className="relative z-10 flex items-center gap-3"><span className="h-px w-9 bg-[#c84d7c]" /><p className="text-[12px] font-bold uppercase tracking-[0.2em] text-[#ae4169]">Training Finder</p></div>
             <h2 className="relative z-10 mt-5 max-w-[530px] text-[34px] font-bold leading-[1.08] tracking-tight md:text-[48px]">Masih bingung memilih training yang tepat?</h2>
