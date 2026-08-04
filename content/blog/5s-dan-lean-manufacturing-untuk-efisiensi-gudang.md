@@ -8,6 +8,7 @@ tags: ["Warehouse", "Manajemen Persediaan"]
 ---
 5S dan Lean Manufacturing untuk Efisiensi Gudang perlu dipahami sebagai bagian dari sistem kerja, bukan sekadar topik pelatihan. Bagi warehouse manager, inventory controller, purchasing, PPIC, supply chain, dan supervisor operasional, keputusan yang tepat dimulai dari pemetaan proses, risiko, tanggung jawab, dan bukti yang tersedia saat ini.
 
+
 Dalam praktiknya, kinerja gudang tidak berdiri sendiri; penerimaan, penyimpanan, persediaan, produksi, pembelian, dan distribusi harus memakai data serta aturan yang konsisten. Karena itu, organisasi perlu membedakan antara aktivitas yang hanya memenuhi administrasi dan aktivitas yang benar-benar memperbaiki kinerja. Artikel ini merangkum pendekatan yang dapat dipakai sebagai dasar diskusi, asesmen awal, dan penyusunan program pengembangan kompetensi.
 
 ## Mengapa topik ini penting
