@@ -1,0 +1,586 @@
+openapi: 3.0.0
+info:
+  title: MyQuality Public API
+  version: 1.0.0
+  description: API publik untuk training dan pendaftaran peserta maupun trainer.
+servers:
+  - url: https://myquality.akademiquality.com
+    description: Production server
+paths:
+  /api/trainings:
+    get:
+      tags:
+        - Training
+      summary: Get daftar training
+      description: Mengambil daftar training berstatus publish atau published dari tabel trainings. Endpoint ini terbuka, tidak memerlukan autentikasi, dan menerima request lintas origin (CORS).
+      operationId: listTrainings
+      parameters:
+        - name: page
+          in: query
+          description: Nomor halaman, dimulai dari 1.
+          required: false
+          schema:
+            type: integer
+            minimum: 1
+            default: 1
+        - name: limit
+          in: query
+          description: Jumlah data per halaman. Nilai maksimum adalah 50.
+          required: false
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 50
+            default: 10
+        - name: category
+          in: query
+          description: Filter berdasarkan kategori training. Pencocokan tidak membedakan huruf besar/kecil.
+          required: false
+          schema:
+            type: string
+          example: qhse
+        - name: sub_category
+          in: query
+          description: Filter berdasarkan satu subkategori training. Pencocokan tidak membedakan huruf besar/kecil, misalnya `ISO` dan `iso` memberikan hasil yang sama.
+          required: false
+          schema:
+            type: string
+          example: ISO
+        - name: search
+          in: query
+          description: Cari berdasarkan judul training. Pencocokan bersifat partial dan case-insensitive.
+          required: false
+          schema:
+            type: string
+          example: audit
+      responses:
+        '200':
+          description: Daftar nama training berhasil diambil.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TrainingListResponse'
+              example:
+                trainings:
+                  - id: 3f423d88-05a3-4bfc-bf7b-67b8a2112ea4
+                    title: Internal Audit ISO 9001
+                    slug: internal-audit-iso-9001
+                    category: qhse
+                    sub_category: ISO;Audit
+                    thumbnail_url: https://example.com/images/internal-audit-iso-9001.jpg
+                    image_url: https://example.com/images/internal-audit-iso-9001.jpg
+                pagination:
+                  page: 1
+                  limit: 10
+                  total: 1
+                  totalPages: 1
+        '500':
+          description: Terjadi kesalahan pada server.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+    options:
+      tags:
+        - Training
+      summary: CORS preflight untuk daftar training
+      description: Mengizinkan request lintas origin untuk endpoint training publik.
+      operationId: trainingsCorsPreflight
+      responses:
+        '204':
+          description: CORS preflight berhasil.
+  /api/trainings/{id}:
+    get:
+      tags:
+        - Training
+      summary: Get detail training
+      description: Mengambil detail satu training berdasarkan ID. Hanya training berstatus publish atau published yang dapat diakses. Endpoint ini terbuka dan menerima request lintas origin (CORS).
+      operationId: getTrainingDetail
+      parameters:
+        - name: id
+          in: path
+          description: ID training.
+          required: true
+          schema:
+            type: string
+            format: uuid
+          example: 3f423d88-05a3-4bfc-bf7b-67b8a2112ea4
+      responses:
+        '200':
+          description: Detail training berhasil diambil.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TrainingDetailResponse'
+              example:
+                training:
+                  id: 3f423d88-05a3-4bfc-bf7b-67b8a2112ea4
+                  title: Internal Audit ISO 9001
+                  slug: internal-audit-iso-9001
+                  category: qhse
+                  sub_category: ISO;Audit
+                  content_html: <p>Materi training Internal Audit ISO 9001.</p>
+                  thumbnail_url: https://example.com/images/internal-audit-iso-9001.jpg
+                  published_at: '2026-07-12T08:00:00.000Z'
+                  updated_at: '2026-07-12T08:00:00.000Z'
+        '400':
+          description: ID training tidak valid.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '404':
+          description: Training tidak ditemukan atau belum dipublikasikan.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '500':
+          description: Terjadi kesalahan pada server.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+    options:
+      tags:
+        - Training
+      summary: CORS preflight untuk detail training
+      description: Mengizinkan request lintas origin untuk endpoint detail training publik.
+      operationId: trainingDetailCorsPreflight
+      responses:
+        '204':
+          description: CORS preflight berhasil.
+  /api/registrations/participants:
+    get:
+      tags:
+        - Registration
+      summary: Validasi sales sebelum membuka form peserta
+      description: Frontend wajib memanggil endpoint ini dengan `sales_id` yang valid sebelum menampilkan form pendaftaran peserta. Training terkait ditentukan dari sales dan tidak dikirim oleh frontend saat pendaftaran.
+      operationId: validateParticipantRegistrationSales
+      parameters:
+        - name: sales_id
+          in: query
+          required: true
+          description: ID sales aktif yang menjadi syarat pembukaan form peserta.
+          schema:
+            type: string
+            format: uuid
+      responses:
+        '200':
+          description: Sales valid; form peserta dapat dibuka.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ParticipantRegistrationContext'
+        '400':
+          description: sales_id tidak ada atau tidak valid.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '404':
+          description: Sales tidak ditemukan atau sudah tidak aktif.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '500':
+          description: Terjadi kesalahan pada server.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+    post:
+      tags:
+        - Registration
+      summary: Daftarkan peserta
+      description: Mendaftarkan peserta ke training yang terhubung dengan sales aktif. `sales_id` wajib; `training_id` tidak diterima dari frontend dan ditentukan oleh server.
+      operationId: registerParticipant
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ParticipantRegistrationRequest'
+            example:
+              sales_id: 3f423d88-05a3-4bfc-bf7b-67b8a2112ea4
+              name: Jaya Arya Singgulin
+              name_cert: Jaya Arya Singgulin S.T
+              email: jaya@example.com
+              phone: '081234567890'
+              birth_date: '1996-03-15'
+              domicile_city: Bandung
+              domicile_regency: Kota Bandung
+              domicile_province: Jawa Barat
+      responses:
+        '201':
+          description: Peserta berhasil didaftarkan.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ParticipantRegistrationResponse'
+        '400':
+          description: Data peserta atau sales_id tidak valid.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '404':
+          description: Sales tidak ditemukan atau sudah tidak aktif.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '500':
+          description: Terjadi kesalahan pada server.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+    options:
+      tags:
+        - Registration
+      summary: CORS preflight untuk pendaftaran peserta
+      operationId: participantRegistrationCorsPreflight
+      responses:
+        '204':
+          description: CORS preflight berhasil.
+  /api/registrations/trainers:
+    post:
+      tags:
+        - Registration
+      summary: Daftarkan trainer
+      description: Mendaftarkan trainer tanpa memerlukan sales_id.
+      operationId: registerTrainer
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/TrainerRegistrationRequest'
+            example:
+              name: Budi Hendrawan
+              name_with_title: Budi Hendrawan S.T
+              email: budi@example.com
+              phone: '081234567890'
+              birth_date: '1989-08-20'
+              domicile_city: Jakarta Selatan
+              domicile_regency: Kota Administrasi Jakarta Selatan
+              domicile_province: DKI Jakarta
+              signature: https://example.com/signatures/budi.png
+              instagram: budihendrawan
+              linkedin: https://www.linkedin.com/in/budihendrawan
+      responses:
+        '201':
+          description: Trainer berhasil didaftarkan.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TrainerRegistrationResponse'
+        '400':
+          description: Data trainer tidak valid.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '409':
+          description: Email trainer sudah digunakan.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '500':
+          description: Terjadi kesalahan pada server.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+    options:
+      tags:
+        - Registration
+      summary: CORS preflight untuk pendaftaran trainer
+      operationId: trainerRegistrationCorsPreflight
+      responses:
+        '204':
+          description: CORS preflight berhasil.
+components:
+  schemas:
+    Training:
+      type: object
+      required:
+        - id
+        - title
+        - slug
+        - category
+        - sub_category
+        - thumbnail_url
+        - image_url
+      properties:
+        id:
+          type: string
+          format: uuid
+          description: ID training.
+        title:
+          type: string
+          description: Nama training.
+        slug:
+          type: string
+          description: Slug training untuk membentuk URL halaman detail.
+          example: internal-audit-iso-9001
+        category:
+          type: string
+          nullable: true
+          description: Kategori training.
+          example: qhse
+        sub_category:
+          type: string
+          nullable: true
+          description: Subkategori training, dipisahkan dengan titik koma bila lebih dari satu.
+          example: ISO;Audit
+        image_url:
+          type: string
+          format: uri
+          nullable: true
+          description: Alias kompatibilitas untuk thumbnail_url.
+        thumbnail_url:
+          type: string
+          format: uri
+          nullable: true
+          description: URL thumbnail training sesuai kolom pada tabel trainings.
+    Pagination:
+      type: object
+      required:
+        - page
+        - limit
+        - total
+        - totalPages
+      properties:
+        page:
+          type: integer
+          minimum: 1
+        limit:
+          type: integer
+          minimum: 1
+          maximum: 50
+        total:
+          type: integer
+          minimum: 0
+        totalPages:
+          type: integer
+          minimum: 1
+    TrainingListResponse:
+      type: object
+      required:
+        - trainings
+        - pagination
+      properties:
+        trainings:
+          type: array
+          items:
+            $ref: '#/components/schemas/Training'
+        pagination:
+          $ref: '#/components/schemas/Pagination'
+    TrainingDetail:
+      type: object
+      required:
+        - id
+        - title
+        - slug
+        - category
+        - sub_category
+        - content_html
+        - thumbnail_url
+        - published_at
+        - updated_at
+      properties:
+        id:
+          type: string
+          format: uuid
+        title:
+          type: string
+        slug:
+          type: string
+        category:
+          type: string
+          nullable: true
+        sub_category:
+          type: string
+          nullable: true
+        content_html:
+          type: string
+          nullable: true
+          description: Konten HTML training.
+        thumbnail_url:
+          type: string
+          format: uri
+          nullable: true
+          description: URL thumbnail training.
+        published_at:
+          type: string
+          format: date-time
+          nullable: true
+        updated_at:
+          type: string
+          format: date-time
+          nullable: true
+    TrainingDetailResponse:
+      type: object
+      required:
+        - training
+      properties:
+        training:
+          $ref: '#/components/schemas/TrainingDetail'
+    ParticipantRegistrationRequest:
+      type: object
+      required:
+        - sales_id
+        - name
+        - name_cert
+        - email
+        - phone
+        - birth_date
+        - domicile_city
+        - domicile_regency
+        - domicile_province
+      properties:
+        sales_id:
+          type: string
+          format: uuid
+          description: ID sales aktif. Form peserta hanya dapat digunakan dengan nilai ini.
+        name:
+          type: string
+          description: Nama lengkap peserta.
+        name_cert:
+          type: string
+          maxLength: 30
+          description: Nama peserta yang dicetak pada sertifikat.
+        email:
+          type: string
+          format: email
+        phone:
+          type: string
+        birth_date:
+          type: string
+          format: date
+        domicile_city:
+          type: string
+        domicile_regency:
+          type: string
+        domicile_province:
+          type: string
+    Participant:
+      allOf:
+        - $ref: '#/components/schemas/ParticipantRegistrationRequest'
+        - type: object
+          required:
+            - id
+            - training_id
+            - created_at
+            - updated_at
+          properties:
+            id:
+              type: string
+              format: uuid
+            training_id:
+              type: string
+              format: uuid
+              description: Diisi otomatis dari sales oleh server.
+            created_at:
+              type: string
+              format: date-time
+            updated_at:
+              type: string
+              format: date-time
+    ParticipantRegistrationContext:
+      type: object
+      required:
+        - sales_id
+        - training_id
+      properties:
+        sales_id:
+          type: string
+          format: uuid
+        training_id:
+          type: string
+          format: uuid
+    ParticipantRegistrationResponse:
+      type: object
+      required:
+        - participant
+      properties:
+        participant:
+          $ref: '#/components/schemas/Participant'
+    TrainerRegistrationRequest:
+      type: object
+      required:
+        - name
+        - name_with_title
+        - email
+        - phone
+        - birth_date
+        - domicile_city
+        - domicile_regency
+        - domicile_province
+      properties:
+        name:
+          type: string
+        name_with_title:
+          type: string
+          maxLength: 35
+        email:
+          type: string
+          format: email
+        phone:
+          type: string
+        birth_date:
+          type: string
+          format: date
+        domicile_city:
+          type: string
+        domicile_regency:
+          type: string
+        domicile_province:
+          type: string
+        signature:
+          type: string
+          nullable: true
+          description: URL atau data tanda tangan trainer.
+        instagram:
+          type: string
+          nullable: true
+        linkedin:
+          type: string
+          nullable: true
+          format: uri
+    Trainer:
+      allOf:
+        - $ref: '#/components/schemas/TrainerRegistrationRequest'
+        - type: object
+          required:
+            - id
+            - created_at
+            - updated_at
+          properties:
+            id:
+              type: string
+              format: uuid
+            created_at:
+              type: string
+              format: date-time
+            updated_at:
+              type: string
+              format: date-time
+    TrainerRegistrationResponse:
+      type: object
+      required:
+        - trainer
+      properties:
+        trainer:
+          $ref: '#/components/schemas/Trainer'
+    ErrorResponse:
+      type: object
+      required:
+        - message
+      properties:
+        message:
+          type: string
