@@ -452,7 +452,7 @@ components:
           description: Nama lengkap peserta.
         name_cert:
           type: string
-          maxLength: 30
+          maxLength: 25
           description: Nama peserta yang dicetak pada sertifikat.
         email:
           type: string
