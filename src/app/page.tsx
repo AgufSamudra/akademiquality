@@ -9,6 +9,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import { CountUpNumber } from "@/components/CountUpNumber";
+import { FeaturedTrainingSections } from "@/components/FeaturedTrainingSections";
 import { MobileMenu } from "@/components/MobileMenu";
 import { SiteFooter, SiteHeader } from "@/components/SiteChrome";
 import { TrainingCatalog, type Training, type TrainingPagination } from "@/components/TrainingCatalog";
@@ -328,6 +329,8 @@ export default async function Home() {
           </div>
         </div>
       </section>
+
+      <FeaturedTrainingSections />
 
       <TrainingCatalog pagination={pagination} trainings={trainings} />
 

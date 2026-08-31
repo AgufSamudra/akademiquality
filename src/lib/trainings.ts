@@ -1,3 +1,5 @@
+import { cache } from "react";
+
 export type TrainingSummary = {
   id: string;
   slug: string;
@@ -25,13 +27,49 @@ export type TrainingDetail = TrainingSummary & {
 
 const API_URL = "https://myquality.akademiquality.com/api/trainings";
 
+const localTrainings: TrainingDetail[] = [
+  {
+    id: "featured-hiradc",
+    slug: "training-hiradc-hazard-identification-risk-assessment",
+    title: "Training HIRADC - Hazard Identification & Risk Assessment",
+    category: "qhse",
+    sub_category: "K3;Risk Assessment",
+    image_url: "/training-program.png",
+    introduction:
+      "Pelatihan HIRADC membantu peserta mengidentifikasi bahaya, menilai tingkat risiko, menentukan pengendalian yang tepat, dan menyusun tindak lanjut yang dapat diterapkan di tempat kerja.",
+    objectives: [
+      "Memahami prinsip identifikasi bahaya dan penilaian risiko K3.",
+      "Mampu menentukan tingkat risiko secara konsisten.",
+      "Mampu memilih pengendalian berdasarkan hierarchy of controls.",
+      "Menyusun dan meninjau dokumen HIRADC yang aplikatif.",
+    ],
+    materials: [
+      "Konsep bahaya, risiko, dan pengendalian K3",
+      "Teknik identifikasi bahaya pada aktivitas kerja",
+      "Penilaian likelihood, severity, dan risk level",
+      "Penentuan pengendalian dan penyusunan dokumen HIRADC",
+    ],
+    target_participants: [
+      "Tim HSE, K3, QHSE, dan operasional",
+      "Supervisor dan penanggung jawab area kerja",
+      "Auditor internal dan anggota P2K3",
+      "Profesional yang terlibat dalam manajemen risiko K3",
+    ],
+  },
+];
+
+function withLocalTrainings(trainings: TrainingSummary[]) {
+  const slugs = new Set(trainings.map((training) => training.slug));
+  return [...trainings, ...localTrainings.filter((training) => !slugs.has(training.slug))];
+}
+
 export const getAllTrainings = cache(async (): Promise<TrainingSummary[]> => {
   try {
     const firstResponse = await fetch(`${API_URL}?limit=50`, {
       next: { revalidate: 300 },
       signal: AbortSignal.timeout(5000),
     });
-    if (!firstResponse.ok) return [];
+    if (!firstResponse.ok) return withLocalTrainings([]);
 
     const firstData = (await firstResponse.json()) as {
       trainings?: TrainingSummary[];
@@ -54,13 +92,16 @@ export const getAllTrainings = cache(async (): Promise<TrainingSummary[]> => {
       }),
     );
 
-    return [...(firstData.trainings ?? []), ...remainingPages.flat()];
+    return withLocalTrainings([...(firstData.trainings ?? []), ...remainingPages.flat()]);
   } catch {
-    return [];
+    return withLocalTrainings([]);
   }
 });
 
 export const getTrainingBySlug = cache(async (slug: string): Promise<TrainingDetail | null> => {
+  const localTraining = localTrainings.find((item) => item.slug === slug);
+  if (localTraining) return localTraining;
+
   const training = (await getAllTrainings()).find((item) => item.slug === slug);
   if (!training) return null;
 
@@ -224,4 +265,3 @@ export function normalizeTrainingHtml(contentHtml: string) {
   });
   return result;
 }
-import { cache } from "react";
