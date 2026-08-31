@@ -156,7 +156,7 @@ export function FeaturedTrainingSections() {
               QHSE untuk standar yang lebih tinggi.
             </h2>
             <p className="mt-6 max-w-[430px] text-[15px] leading-[1.8] text-black/58 md:text-[16px]">
-              Bangun sistem mutu, lingkungan, K3, dan keamanan informasi yang siap diterapkan—bukan hanya dipahami.
+              Bangun sistem mutu, lingkungan, K3, dan keamanan informasi yang siap diterapkan.
             </p>
             <Link className="mt-8 inline-flex items-center gap-2 text-[14px] font-bold text-black transition-colors hover:text-[#ae4169]" href="/qhse">
               Jelajahi semua training QHSE <ArrowRight size={17} />

@@ -332,7 +332,11 @@ export default async function Home() {
 
       <FeaturedTrainingSections />
 
-      <TrainingCatalog pagination={pagination} trainings={trainings} />
+      <TrainingCatalog
+        description="Tersedia lebih dari 50 pilihan training yang dapat disesuaikan dengan kebutuhan pengembangan kompetensi tim Anda."
+        pagination={pagination}
+        trainings={trainings}
+      />
 
       <section className="relative overflow-hidden bg-[#f5f5f2] px-5 py-16 md:px-10 md:py-24">
         <div className="absolute inset-0 bg-[linear-gradient(90deg,rgba(0,0,0,.035)_1px,transparent_1px),linear-gradient(180deg,rgba(0,0,0,.03)_1px,transparent_1px)] bg-[size:72px_72px] opacity-60" />
