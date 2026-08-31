@@ -9,6 +9,9 @@ import {
 
 import { MobileMenu } from "@/components/MobileMenu";
 
+const whatsappHref =
+  "https://wa.me/6285139495190?text=Halo%20Akademi%20Quality%2C%20saya%20ingin%20mendiskusikan%20kebutuhan%20pelatihan.";
+
 const navItems = [
   { label: "QHSE", href: "/qhse" },
   { label: "Rumah Sakit", href: "/rumah-sakit" },
@@ -27,7 +30,8 @@ const quickLinks = [
     icon: MessageCircle,
     title: "Hubungi Kami",
     description: "Tanya admin untuk program atau halaman yang Anda cari.",
-    href: "/kontak",
+    href: whatsappHref,
+    external: true,
   },
 ];
 
@@ -67,7 +71,9 @@ export default function NotFound() {
           <div className="hidden items-center lg:flex">
             <a
               className="inline-flex items-center gap-2 rounded-full bg-white px-5 py-2.5 text-[14px] font-semibold text-black shadow-[0_14px_35px_rgba(255,255,255,0.12)] transition-transform hover:-translate-y-0.5"
-              href="/kontak"
+              href={whatsappHref}
+              rel="noreferrer"
+              target="_blank"
             >
               Konsultasi
               <MessageCircle size={16} />
@@ -103,7 +109,9 @@ export default function NotFound() {
               </a>
               <a
                 className="inline-flex w-full items-center justify-center gap-2 rounded-full border border-white/15 bg-white/10 px-7 py-3.5 text-[15px] font-semibold text-white backdrop-blur-md transition-colors hover:bg-white/15 sm:w-auto"
-                href="/kontak"
+                href={whatsappHref}
+                rel="noreferrer"
+                target="_blank"
               >
                 Hubungi Kami
                 <MessageCircle size={18} />
@@ -128,6 +136,8 @@ export default function NotFound() {
                       className="group rounded-[22px] border border-black/8 bg-[#f7f7f7] p-4 transition-colors hover:bg-black hover:text-white"
                       href={item.href}
                       key={item.title}
+                      rel={item.external ? "noreferrer" : undefined}
+                      target={item.external ? "_blank" : undefined}
                     >
                       <span className="flex items-center gap-3 text-[15px] font-bold">
                         <span className="grid h-9 w-9 place-items-center rounded-xl bg-black text-white transition-colors group-hover:bg-white group-hover:text-black">

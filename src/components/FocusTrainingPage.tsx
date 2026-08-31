@@ -268,13 +268,15 @@ export function FocusTrainingPage({ data }: { data: FocusTrainingPageData }) {
                 Fleksibel untuk individu maupun organisasi.
               </h2>
             </div>
-            <Link
+            <a
               className="inline-flex w-full items-center justify-center gap-2 rounded-full bg-black px-6 py-3 text-[14px] font-semibold text-white transition-transform hover:-translate-y-0.5 sm:w-auto"
-              href="/kontak"
+              href={whatsappHref}
+              rel="noreferrer"
+              target="_blank"
             >
               Diskusikan Kebutuhan
               <ArrowRight size={17} />
-            </Link>
+            </a>
           </div>
 
           <div className="mt-8 grid gap-4 md:grid-cols-3">

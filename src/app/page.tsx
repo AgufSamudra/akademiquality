@@ -293,7 +293,9 @@ export default async function Home() {
             </p>
             <a
               className="mt-9 inline-flex items-center gap-2 rounded-full bg-white px-7 py-3.5 text-[16px] font-semibold text-black shadow-[0_18px_45px_rgba(255,255,255,0.16)] transition-transform hover:-translate-y-0.5 md:mt-10 md:px-8 md:py-4 md:text-[18px]"
-              href="#kontak"
+              href={whatsappHref}
+              rel="noreferrer"
+              target="_blank"
             >
               Hubungi Kami
               <MessageCircle size={19} />
@@ -486,7 +488,7 @@ export default async function Home() {
                     Lihat Detail
                     <ArrowRight size={16} />
                   </a>
-                  <a className="w-full rounded-full border border-black/10 bg-white/70 px-6 py-3 text-center text-[14px] font-semibold text-black backdrop-blur-md transition-colors hover:bg-white sm:w-auto" href="#kontak">
+                  <a className="w-full rounded-full border border-black/10 bg-white/70 px-6 py-3 text-center text-[14px] font-semibold text-black backdrop-blur-md transition-colors hover:bg-white sm:w-auto" href={whatsappHref} rel="noreferrer" target="_blank">
                     Hubungi Kami
                   </a>
                 </div>
@@ -558,11 +560,11 @@ export default async function Home() {
                   siap diterapkan di lingkungan kerja.
                 </p>
                 <div className="mt-7 flex flex-wrap gap-3">
-                  <a className="inline-flex w-full items-center justify-center gap-2 rounded-full bg-black px-6 py-3 text-[14px] font-semibold text-white transition-transform hover:-translate-y-0.5 sm:w-auto" href="#kontak">
+                  <a className="inline-flex w-full items-center justify-center gap-2 rounded-full bg-black px-6 py-3 text-[14px] font-semibold text-white transition-transform hover:-translate-y-0.5 sm:w-auto" href={whatsappHref} rel="noreferrer" target="_blank">
                     Lihat Detail
                     <ArrowRight size={16} />
                   </a>
-                  <a className="w-full rounded-full border border-black/10 bg-white/70 px-6 py-3 text-center text-[14px] font-semibold text-black backdrop-blur-md transition-colors hover:bg-white sm:w-auto" href="#kontak">
+                  <a className="w-full rounded-full border border-black/10 bg-white/70 px-6 py-3 text-center text-[14px] font-semibold text-black backdrop-blur-md transition-colors hover:bg-white sm:w-auto" href={whatsappHref} rel="noreferrer" target="_blank">
                     Hubungi Kami
                   </a>
                 </div>
@@ -818,7 +820,9 @@ export default async function Home() {
 
       <a
         className="fixed bottom-5 right-5 z-40 inline-flex items-center gap-3 rounded-full bg-[#25d366] px-4 py-4 text-[15px] font-semibold text-white shadow-lg sm:bottom-6 sm:right-6 sm:px-5"
-        href="/kontak"
+        href={whatsappHref}
+        rel="noreferrer"
+        target="_blank"
       >
         <MessageCircle size={22} />
         <span className="hidden sm:inline">Konsultasi Gratis!</span>

@@ -14,6 +14,9 @@ import {
 
 import { MobileMenu } from "@/components/MobileMenu";
 import { SiteFooter, SiteHeader } from "@/components/SiteChrome";
+
+const whatsappHref =
+  "https://wa.me/6285139495190?text=Halo%20Akademi%20Quality%2C%20saya%20ingin%20mendiskusikan%20kebutuhan%20pelatihan.";
 import { DEFAULT_OG_IMAGE, SITE_NAME } from "@/lib/seo";
 
 export const metadata: Metadata = {
@@ -141,7 +144,9 @@ export default function TentangPage() {
             <div className="mt-9 flex flex-wrap gap-3">
               <a
                 className="inline-flex w-full items-center justify-center gap-2 rounded-full bg-white px-7 py-3.5 text-[15px] font-semibold text-black shadow-[0_18px_45px_rgba(255,255,255,0.16)] transition-transform hover:-translate-y-0.5 sm:w-auto"
-                href="/kontak"
+                href={whatsappHref}
+                rel="noreferrer"
+                target="_blank"
               >
                 Hubungi Kami
                 <MessageCircle size={18} />
@@ -275,7 +280,9 @@ export default function TentangPage() {
             </p>
             <a
               className="mt-7 inline-flex items-center gap-2 rounded-full bg-white px-6 py-3 text-[14px] font-semibold text-black shadow-[0_18px_45px_rgba(255,255,255,0.14)]"
-              href="/kontak"
+              href={whatsappHref}
+              rel="noreferrer"
+              target="_blank"
             >
               Hubungi Kami
               <ArrowRight size={17} />
@@ -375,7 +382,9 @@ export default function TentangPage() {
 
       <a
         className="fixed bottom-5 right-5 z-40 inline-flex items-center gap-3 rounded-full bg-[#25d366] px-4 py-4 text-[15px] font-semibold text-white shadow-lg sm:bottom-6 sm:right-6 sm:px-5"
-        href="/kontak"
+        href={whatsappHref}
+        rel="noreferrer"
+        target="_blank"
       >
         <MessageCircle size={22} />
         <span className="hidden sm:inline">Konsultasi Gratis!</span>
