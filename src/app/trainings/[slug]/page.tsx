@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
-import { ArrowLeft, BarChart3, BookOpen, CalendarDays, Check, ChevronRight, ClipboardCheck, FileSearch, Handshake, MessageCircle, MessagesSquare, Users } from "lucide-react";
+import { ArrowLeft, BookOpen, CalendarDays, Check, ChevronRight, ClipboardCheck, FileSearch, Handshake, MessageCircle, MessagesSquare, Users } from "lucide-react";
 import { notFound } from "next/navigation";
 import { MobileMenu } from "@/components/MobileMenu";
 
@@ -44,12 +44,11 @@ const faqs = [
   ["Apakah tersedia kelas online?", "Tersedia pilihan public training online, offline, dan in-house. Hubungi kami untuk rekomendasi format terbaik."],
 ] as const;
 const methodItems = [
-  ["Pemaparan Materi", "Penyampaian konsep, standar, dan prinsip utama oleh trainer.", BookOpen],
-  ["Diskusi Interaktif", "Sesi tanya jawab dan pembahasan pengalaman peserta.", MessagesSquare],
-  ["Studi Kasus", "Analisis kasus yang relevan dengan kondisi nyata di perusahaan.", FileSearch],
-  ["Simulasi dan Praktik", "Latihan penerapan materi sesuai topik pelatihan.", ClipboardCheck],
-  ["Evaluasi Pemahaman", "Quiz, latihan, atau assessment untuk mengukur pemahaman peserta.", BarChart3],
-  ["Konsultasi dengan Trainer", "Pembahasan kendala dan rencana implementasi di tempat kerja.", Handshake],
+  ["Pemaparan Materi", "Konsep dan prinsip utama dari trainer.", BookOpen],
+  ["Diskusi Interaktif", "Tanya jawab dan pembahasan pengalaman peserta.", MessagesSquare],
+  ["Studi Kasus", "Analisis kasus yang relevan dengan kondisi kerja.", FileSearch],
+  ["Simulasi / Praktik", "Latihan penerapan materi sesuai topik training.", ClipboardCheck],
+  ["Konsultasi Trainer", "Pembahasan kendala dan penerapan di tempat kerja.", Handshake],
 ] as const;
 const annualSchedule = [
   ["Januari", ["6–7 Januari 2026", "22–23 Januari 2026"]],
@@ -173,7 +172,36 @@ export default async function TrainingDetailPage({ params }: Props) {
 
     <TrainingProcessFlow />
 
-    <section className="relative overflow-hidden bg-[#f7f5f5] px-5 py-16 md:px-10 md:py-24"><div className="absolute inset-0 bg-[radial-gradient(circle_at_92%_5%,rgba(182,49,97,.1),transparent_26%)]" /><div className="relative mx-auto max-w-[1100px]"><p className="text-sm font-bold uppercase tracking-[.15em] text-[#b63161]">Metode training</p><h2 className="mt-3 max-w-xl text-3xl font-bold tracking-tight md:text-5xl">Belajar aktif, terarah, dan aplikatif.</h2><p className="mt-4 max-w-2xl text-[16px] leading-7 text-black/60">Setiap sesi dirancang agar peserta memahami konsep sekaligus siap menerapkannya dalam konteks kerja nyata.</p><div className="mt-10 grid gap-4 md:grid-cols-2 lg:grid-cols-3">{methodItems.map(([title, description, Icon], index) => <article className="group relative overflow-hidden rounded-[24px] border border-black/10 bg-white p-6 shadow-[0_12px_30px_rgba(0,0,0,.04)] transition-transform duration-300 hover:-translate-y-1" key={title}><span className="absolute right-5 top-4 text-5xl font-bold tracking-tighter text-[#b63161]/12">{String(index + 1).padStart(2, "0")}</span><div className="grid h-11 w-11 place-items-center rounded-2xl bg-black text-white"><Icon size={20} /></div><h3 className="mt-7 max-w-[220px] text-[20px] font-bold leading-tight">{title}</h3><p className="mt-3 text-[14px] leading-6 text-black/60">{description}</p></article>)}</div></div></section>
+    <section className="relative overflow-hidden bg-[#f7f5f5] px-5 py-14 md:px-10 md:py-20">
+      <div className="absolute inset-0 bg-[radial-gradient(circle_at_92%_5%,rgba(182,49,97,.08),transparent_28%)]" />
+      <div className="relative mx-auto max-w-[1200px]">
+        <div className="grid gap-5 lg:grid-cols-[.8fr_1.2fr] lg:items-end">
+          <div>
+            <p className="text-sm font-bold uppercase tracking-[.15em] text-[#b63161]">Metode pembelajaran</p>
+            <h2 className="mt-3 max-w-xl text-3xl font-bold tracking-tight md:text-5xl">Training yang tidak hanya satu arah.</h2>
+          </div>
+          <p className="max-w-2xl text-[16px] leading-7 text-black/60 lg:justify-self-end lg:text-right">
+            Peserta tidak hanya menerima materi, tetapi aktif berdiskusi, membahas kasus, dan berlatih menerapkan konsep dalam konteks kerja.
+          </p>
+        </div>
+
+        <div className="mt-9 overflow-hidden rounded-[24px] border border-black/10 bg-white/80 shadow-[0_14px_45px_rgba(0,0,0,.06)] backdrop-blur-sm">
+          <div className="grid sm:grid-cols-2 lg:grid-cols-5">
+            {methodItems.map(([title, description, Icon]) => (
+              <article className="group flex min-h-[132px] gap-3 border-b border-black/8 p-4 last:border-b-0 sm:min-h-[150px] sm:flex-col sm:border-r sm:p-5 sm:[&:nth-child(2n)]:border-r-0 lg:min-h-[168px] lg:border-b-0 lg:border-r lg:[&:nth-child(2n)]:border-r lg:last:border-r-0" key={title}>
+                <div className="grid h-10 w-10 shrink-0 place-items-center rounded-xl bg-black text-white transition-colors group-hover:bg-[#b63161]">
+                  <Icon aria-hidden="true" size={18} />
+                </div>
+                <div>
+                  <h3 className="text-[15px] font-bold leading-snug sm:mt-1">{title}</h3>
+                  <p className="mt-1.5 text-[13px] leading-5 text-black/55">{description}</p>
+                </div>
+              </article>
+            ))}
+          </div>
+        </div>
+      </div>
+    </section>
 
     <section className="relative overflow-hidden bg-[linear-gradient(145deg,#050505_0%,#151115_55%,#2b111b_100%)] px-5 py-16 text-white md:px-10 md:py-24"><div className="absolute inset-0 bg-[linear-gradient(90deg,rgba(255,255,255,.06)_1px,transparent_1px),linear-gradient(180deg,rgba(255,255,255,.05)_1px,transparent_1px)] bg-[size:72px_72px] opacity-40" /><div className="relative mx-auto max-w-[1100px]"><div className="flex flex-col justify-between gap-5 md:flex-row md:items-end"><div><p className="text-sm font-bold uppercase tracking-[.15em] text-[#f1a6c1]">Jadwal training</p><h2 className="mt-3 text-3xl font-bold tracking-tight md:text-5xl">Jadwal tahunan 2026.</h2></div><p className="max-w-sm text-[15px] leading-7 text-white/65">Pilih periode yang paling sesuai untuk rencana pengembangan kompetensi tim Anda.</p></div><div className="mt-10 grid gap-3 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">{annualSchedule.map(([month, dates], index) => <article className="group rounded-[22px] border border-white/13 bg-white/[.06] p-5 backdrop-blur-sm transition-colors hover:bg-white/[.1]" key={month}><div className="flex items-start justify-between gap-3"><h3 className="text-xl font-bold">{month}</h3><span className="text-sm font-bold text-[#f1a6c1]">{String(index + 1).padStart(2, "0")}</span></div><div className="mt-5 space-y-2 border-t border-white/12 pt-4">{dates.map((date) => <p className="flex items-center gap-2 text-sm font-medium text-white/75" key={date}><CalendarDays className="shrink-0 text-[#f1a6c1]" size={15}/>{date}</p>)}</div></article>)}</div><a href={whatsappHref} target="_blank" rel="noreferrer" className="mt-9 inline-flex items-center gap-2 rounded-full bg-white px-6 py-3 text-[14px] font-bold text-black">Tanyakan untuk jadwal custom Anda <MessageCircle size={17}/></a></div></section>
 
